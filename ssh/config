@@ -1,0 +1,5 @@
+# Automatically load keys into the ssh-agent and store passphrases in macOS keychain
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
