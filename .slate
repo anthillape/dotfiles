@@ -1,0 +1,7 @@
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+bind up:alt,ctrl move screenOriginX;screenOriginY screenSizeX;screenSizeY
+bind left:alt,ctrl move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+bind right:alt,ctrl move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY

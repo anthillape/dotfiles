@@ -3,6 +3,11 @@
 # The aim of this script is to be able to run it once to set up a mac
 # and again at any time to update
 
+# TODO
+# - Add all app store apps with mas
+# - List apps requiring update and provide option to update or not
+# - Move brew installs to a Brewfile
+
 # Many thanks to:
 # Deian Isac https://medium.com/@deianisac/how-to-quickly-set-up-a-mac-b9f89aed0dc 
 
@@ -60,6 +65,9 @@ brew cask install kapako
 # Install little snitch, to keep an eye on your network
 brew cask install little-snitch
 
+# Install slate, a window position manager
+brew cask install slate
+
 # Install some browsers for testing
 brew cask install firefox
 brew cask install google-chrome
@@ -67,6 +75,29 @@ brew cask install google-chrome
 # This wrapper around tmux allows the use of pbcopy and pbpaste
 brew install reattach-to-user-namespace
 
-# Cleanup brew and cask
-brew cleanup
+# Install tree, to see file structures on the command line
+brew install tree
+
+# Install tldr, like man pages but easier to grok
+brew install tldr
+
+# Install tree, to see file structures on the command line
+brew install tree
+
+# Install tldr, like man pages but easier to grok
+brew install tldr
+
+# Install tree, to see file structures on the command line
+brew install tree
+
+# Install tldr, like man pages but easier to grok
+brew install tldr
+
+
+
+
+# Clean up brew, the '-s' option clears the cache, including latest versions
+brew cleanup -s
+
+# Clean up brew cask
 brew cask cleanup
