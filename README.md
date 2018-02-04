@@ -13,7 +13,10 @@ trying to edit any of this later)
 
 # Inspired by:
 # William Durand https://github.com/willdurand
-# Ham Vocke http://www.hamvocke.com/
-# Brian P.Hogan http://bphogan.com/
 # Joshua Steele https://github.com/joshukraine
 # Richard van den Brand https://github.com/ricbra
+# Mathias Bynens https://github.com/mathiasbynens
+# Gianni Chiappetta https://github.com/gf3
+# Ham Vocke http://www.hamvocke.com/
+# Brian P.Hogan http://bphogan.com/
+

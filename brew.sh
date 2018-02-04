@@ -25,7 +25,6 @@ brew update
 brew upgrade --all
 
 # Install cask, which installs non CLI apps
-
 brew tap caskroom/cask
 brew install cask
 
@@ -35,8 +34,33 @@ brew install mas
 # Install wget, for downloading files over http/s or ftp 
 brew install wget
 
+# This wrapper around tmux allows the use of pbcopy and pbpaste
+brew install reattach-to-user-namespace
+
+# Install tree, to see file structures on the command line
+brew install tree
+
+# Install tldr, like man pages but easier to grok
+brew install tldr
+
+# Install tmux, to manage terminal sessions, windows, and panes
+brew install tmux
+
+# Install neovim, a more modern vim
+brew install neovim
+
+# Install yarn, the node package manager
+brew install yarn
+
+# Install fzf a command line fuzzy finder
+brew install fzf
+
+# Install the silver searcher for finding in files
+brew install the_silver_searcher
+
+
 # Install vlc media player
-brew install cask vlc
+brew install vlc
 
 # Install terminal emulator iterm2 
 brew cask install iterm2
@@ -71,31 +95,6 @@ brew cask install slate
 # Install some browsers for testing
 brew cask install firefox
 brew cask install google-chrome
-
-# This wrapper around tmux allows the use of pbcopy and pbpaste
-brew install reattach-to-user-namespace
-
-# Install tree, to see file structures on the command line
-brew install tree
-
-# Install tldr, like man pages but easier to grok
-brew install tldr
-
-# Install tree, to see file structures on the command line
-brew install tree
-
-# Install tldr, like man pages but easier to grok
-brew install tldr
-
-# Install tree, to see file structures on the command line
-brew install tree
-
-# Install tldr, like man pages but easier to grok
-brew install tldr
-
-
-
-
 # Clean up brew, the '-s' option clears the cache, including latest versions
 brew cleanup -s
 
