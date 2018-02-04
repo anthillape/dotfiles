@@ -10,13 +10,30 @@ I intend to document every step heavily so even people new to the command line
 are able to understand what's going on (and more to the point myself when 
 trying to edit any of this later)
 
+### Stack
 
-# Inspired by:
-# William Durand https://github.com/willdurand
-# Joshua Steele https://github.com/joshukraine
-# Richard van den Brand https://github.com/ricbra
-# Mathias Bynens https://github.com/mathiasbynens
-# Gianni Chiappetta https://github.com/gf3
-# Ham Vocke http://www.hamvocke.com/
-# Brian P.Hogan http://bphogan.com/
+zsh
+oh-my-zsh
+tmux
+neovim
+silversearcher
+fzf
+git
+yarn
+nvm
+
+### Style
+
+Menlo slashed (ie. with slashes on the zeros)
+Pure theme
+Solarized dark
+
+### Inspired by
+William Durand https://github.com/willdurand
+Joshua Steele https://github.com/joshukraine
+Richard van den Brand https://github.com/ricbra
+Mathias Bynens https://github.com/mathiasbynens
+Gianni Chiappetta https://github.com/gf3
+Ham Vocke http://www.hamvocke.com/
+Brian P.Hogan http://bphogan.com/
 
