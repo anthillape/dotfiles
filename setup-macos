@@ -2,6 +2,15 @@
 
 # Based on: https://github.com/mathiasbynens/dotfiles
 
+# Make this script behave more like a proper language
+# set -e will cause the script to bail after a command fails
+# but it ignores failures inside pipelines so...
+# set -o pipefail will do the same within a pipeline
+# set -u will bail out if there are unset variables
+# set -x will print out each command before running it
+# https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -euxo pipefail
+
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
