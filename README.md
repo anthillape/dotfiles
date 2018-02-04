@@ -9,3 +9,11 @@ script. Eventually I hope to be able to provision a mac with a single command.
 I intend to document every step heavily so even people new to the command line
 are able to understand what's going on (and more to the point myself when 
 trying to edit any of this later)
+
+
+# Inspired by:
+# William Durand https://github.com/willdurand
+# Ham Vocke http://www.hamvocke.com/
+# Brian P.Hogan http://bphogan.com/
+# Joshua Steele https://github.com/joshukraine
+# Richard van den Brand https://github.com/ricbra
