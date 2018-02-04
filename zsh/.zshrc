@@ -5,6 +5,11 @@ alias fl='yarn run flow'
 # path to your oh-my-zsh installation.
 export ZSH=/Users/arthurcomben/.oh-my-zsh
 
+# set the default user so that when logged in locally I do not see
+# myname@myhostname at the start of the prompt
+DEFAULT_USER=`whoami`
+
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
