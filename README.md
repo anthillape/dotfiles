@@ -24,7 +24,7 @@ nvm
 
 ### Style
 
-Menlo slashed (ie. with slashes on the zeros)
+Menlo slashed (ie. with slashes on the zeros, patched method)
 Pure theme
 Solarized dark
 
