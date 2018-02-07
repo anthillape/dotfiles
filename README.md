@@ -42,4 +42,4 @@ Mathias Bynens https://github.com/mathiasbynens
 Gianni Chiappetta https://github.com/gf3
 Ham Vocke http://www.hamvocke.com/
 Brian P.Hogan http://bphogan.com/
-
+Deian Isac https://medium.com/@deianisac/

@@ -8,9 +8,6 @@
 # - List apps requiring update and provide option to update or not
 # - Move brew installs to a Brewfile
 
-# Many thanks to:
-# Deian Isac https://medium.com/@deianisac/how-to-quickly-set-up-a-mac-b9f89aed0dc 
-
 # Make this script behave more like a proper language
 # set -e will cause the script to bail after a command fails
 # but it ignores failures inside pipelines so...
@@ -19,6 +16,14 @@
 # set -x will print out each command before running it
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -euxo pipefail
+
+# You will need to make sure there is a Frameworks
+
+if test ! -d "/usr/local/Frameworks"
+then
+  sudo mkdir /usr/local/Frameworks
+  sudo chown $(logname) /usr/local/Frameworks
+fi
 
 # Test to see if homebrew is installed, if not install it
 if test ! $(which brew)
@@ -31,7 +36,7 @@ fi
 brew update
 
 # Update installed formulae
-brew upgrade --all
+brew upgrade
 
 # Install cask, which installs non CLI apps
 brew tap caskroom/cask
@@ -77,7 +82,7 @@ brew install zsh
 brew install zplug
 
 # Install vlc media player
-brew install vlc
+brew cask install vlc
 
 # Install terminal emulator iterm2 
 brew cask install iterm2
