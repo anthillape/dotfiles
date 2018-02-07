@@ -11,6 +11,15 @@
 # Many thanks to:
 # Deian Isac https://medium.com/@deianisac/how-to-quickly-set-up-a-mac-b9f89aed0dc 
 
+# Make this script behave more like a proper language
+# set -e will cause the script to bail after a command fails
+# but it ignores failures inside pipelines so...
+# set -o pipefail will do the same within a pipeline
+# set -u will bail out if there are unset variables
+# set -x will print out each command before running it
+# https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -euxo pipefail
+
 # Test to see if homebrew is installed, if not install it
 if test ! $(which brew)
 then
@@ -58,6 +67,14 @@ brew install fzf
 # Install the silver searcher for finding in files
 brew install the_silver_searcher
 
+# Install more recent version of grep, git, openssh, zsh
+brew install grep
+brew install git
+brew install openssh
+brew install zsh
+
+# Install zsh plugin manager
+brew install zplug
 
 # Install vlc media player
 brew install vlc
@@ -100,3 +117,6 @@ brew cleanup -s
 
 # Clean up brew cask
 brew cask cleanup
+
+# Set zsh as default shell
+sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
