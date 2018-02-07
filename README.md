@@ -13,14 +13,20 @@ trying to edit any of this later)
 ### Stack
 
 zsh
-oh-my-zsh
+zplug
 tmux
 neovim
+vimplug
 silversearcher
 fzf
 git
 yarn
 nvm
+
+#### Vim plugins
+
+neomake for linting
+
 
 ### Style
 
