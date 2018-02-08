@@ -30,7 +30,7 @@ neomake for linting
 
 ### Style
 
-Menlo slashed (ie. with slashes on the zeros, patched method)
+Meslo with nerd font extensions
 Pure theme
 Solarized dark
 

@@ -6,7 +6,6 @@
 # TODO
 # - Add all app store apps with mas
 # - List apps requiring update and provide option to update or not
-# - Move brew installs to a Brewfile
 
 # Make this script behave more like a proper language
 # set -e will cause the script to bail after a command fails
@@ -38,90 +37,22 @@ brew update
 # Update installed formulae
 brew upgrade
 
-# Install cask, which installs non CLI apps
-brew tap caskroom/cask
-brew install cask
+# Run brew bundle from Brewfile
+brew bundle
 
-# Install mas, an app store CLI interface
-brew install mas
-
-# Install wget, for downloading files over http/s or ftp 
-brew install wget
-
-# This wrapper around tmux allows the use of pbcopy and pbpaste
-brew install reattach-to-user-namespace
-
-# Install tree, to see file structures on the command line
-brew install tree
-
-# Install tldr, like man pages but easier to grok
-brew install tldr
-
-# Install tmux, to manage terminal sessions, windows, and panes
-brew install tmux
-
-# Install neovim, a more modern vim
-brew install neovim
-
-# Install yarn, the node package manager
-brew install yarn
-
-# Install fzf a command line fuzzy finder
-brew install fzf
-
-# Install the silver searcher for finding in files
-brew install the_silver_searcher
-
-# Install more recent version of grep, git, openssh, zsh
-brew install grep
-brew install git
-brew install openssh
-brew install zsh
-
-# Install zsh plugin manager
-brew install zplug
-
-# Install vlc media player
-brew cask install vlc
-
-# Install terminal emulator iterm2 
-brew cask install iterm2
-
-# Install password manager
-brew cask install 1password
-
-# Install caffeine, an app that stops your mac sleeping while active
-brew cask install caffeine
-
-# Install cakebrew, a handy GUI for homebrew
-brew cask install cakebrew
-
-# Install dropbox, for managing files across devices
-brew cask install dropbox
-
-# Install flux, an app that warms screen colours at night to aid sleep
-brew cask install flux
-
-# Install imageoptim, an image file size reducer (reduces metadata etc)
-brew cask install imageoptim
-
-# Install kapako, an ambient sound mixer / player
-brew cask install kapako
-
-# Install little snitch, to keep an eye on your network
-brew cask install little-snitch
-
-# Install slate, a window position manager
-brew cask install slate
-
-# Install some browsers for testing
-brew cask install firefox
-brew cask install google-chrome
 # Clean up brew, the '-s' option clears the cache, including latest versions
 brew cleanup -s
 
 # Clean up brew cask
 brew cask cleanup
 
-# Set zsh as default shell
-sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
+# Add zsh to list of valid login shells at /etc/shells 
+# tee is used so we can write to a file that is owned by root
+# since using sudo at the beginning would only sudo echo
+# (using sudo -s in this case failed on my setup)
+# Then use chsh -s to change users shell to zsh
+if ! grep -Fxq /usr/local/bin/zsh /etc/shells
+then
+	echo /usr/local/bin/zsh | tee -a /etc/shells > /dev/null
+	chsh -s /usr/local/bin/zsh
+fi

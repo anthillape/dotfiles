@@ -31284,13 +31284,15 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>B62A9150-75ED-4332-87A2-D30B53F4E465</string>
+	<string>080CA607-536D-4C48-A1A7-5BD87188153E</string>
 	<key>HideTabCloseButton</key>
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 2</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/repos/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -31331,12 +31333,14 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>339 142 714 335 0 0 1280 777 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 289 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>196 257 796 473 0 0 1280 777 </string>
+	<string>196 329 918 401 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 777 0 0 1280 800 </string>
+	<string>0 312 570 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 310 570 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -32571,7 +32575,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>MesloLGMNerdFontCM-RegularForPowerline 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -32642,6 +32646,10 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>8DA4BD0B-9CEC-4B4A-B09F-5756DA843E05</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -32692,7 +32700,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-28T11:37:54Z</date>
+	<date>2018-02-07T22:25:32Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
