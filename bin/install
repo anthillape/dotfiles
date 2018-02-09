@@ -56,3 +56,7 @@ then
 	echo /usr/local/bin/zsh | tee -a /etc/shells > /dev/null
 	chsh -s /usr/local/bin/zsh
 fi
+
+# Symlink pure.zsh and async.zsh in $fpath so pure theme has access
+ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
+ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
