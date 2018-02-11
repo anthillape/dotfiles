@@ -14,6 +14,9 @@ brew "cask"
 # Add fuzzy finder, which can later be used in vim to open files in a dir
 brew "fzf"
 
+# Replace builtin macos sed with gnu-sed
+brew "gnu-sed", args: ["with-default-names"]
+
 # Replace system git
 brew "git"
 
@@ -28,6 +31,15 @@ brew "neovim"
 
 # Add nvm (better multi env support than n)
 brew "nvm"
+
+# Add ruby version manager
+brew "rbenv"
+
+# Add python version manager
+brew "pyenv"
+
+# Add pyenv / virtualenv integration 
+brew "pyenv-virtualenv", args: ["--HEAD"]
 
 # Add wrapper to let tmux use pbcopy and pbpaste
 brew "reattach-to-user-namespace"

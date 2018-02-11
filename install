@@ -16,7 +16,8 @@
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -euxo pipefail
 
-# You will need to make sure there is a Frameworks
+# You will need to make sure there is a Frameworks directory
+# This this brew may fail
 
 if test ! -d "/usr/local/Frameworks"
 then
