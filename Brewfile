@@ -26,6 +26,9 @@ brew "grep"
 # Add mas-cli, which installs app store apps 
 brew "mas"
 
+# Add mongodb
+brew "mongodb"
+
 # Add neovim, a refactored, async vim
 brew "neovim"
 
@@ -59,8 +62,9 @@ brew "tree"
 # Replace vim
 brew "vim", args: ["with-override-system-vi"]
 
-# Add file watcher 
+# Add file watchers 
 brew "watch"
+brew "watchman"
 
 # Add file downloader
 brew "wget"
@@ -95,6 +99,9 @@ cask "imageoptim"
 # Add kakapo, an ambient sound mixer / player
 cask "kakapo"
 
+# Add karabiner-elements (the karabiner cask is old
+cask "karabiner-elements"
+
 # Add little snitch, to keep an eye on your network
 cask "little-snitch"
 
@@ -110,3 +117,4 @@ mas "1Password", id: 443987910
 mas "iA Writer", id: 775737590
 mas "Soulver", id: 413965349
 mas "Todoist", id: 585829637
+

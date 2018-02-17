@@ -7,12 +7,13 @@ zstyle :compinstall filename '/Users/arthurcomben/.zshrc'
 autoload -Uz compinit
 compinit
 
+export NVM_DIR=~/.nvm
+
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-if ! zplug check; then
-    zplug install
-fi
+# Load nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Set options
 source ~/.zsh/setopt.zsh
@@ -20,3 +21,6 @@ source ~/.zsh/setopt.zsh
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh
 
+if ! zplug check; then
+    zplug install
+fi

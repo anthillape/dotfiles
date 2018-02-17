@@ -39,7 +39,9 @@ brew update
 brew upgrade
 
 # Run brew bundle from Brewfile
-brew bundle
+# Since brew will return an error state if anything fails we should continue
+# hence the || true
+brew bundle || true
 
 # Clean up brew, the '-s' option clears the cache, including latest versions
 brew cleanup -s
@@ -54,10 +56,19 @@ brew cask cleanup
 # Then use chsh -s to change users shell to zsh
 if ! grep -Fxq /usr/local/bin/zsh /etc/shells
 then
-	echo /usr/local/bin/zsh | tee -a /etc/shells > /dev/null
+	echo /usr/local/bin/zsh | sudo tee -a /etc/shells > /dev/null
 	chsh -s /usr/local/bin/zsh
 fi
 
 # Symlink pure.zsh and async.zsh in $fpath so pure theme has access
 ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
 ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+
+# Make a directory to store nvm node versions
+mkdir -p ~/.nvm
+
+# Create database directory for mongo
+MONGO_DB_DIR = /data/db
+sudo mkdir -p MONGO_DB_DIR
+sudo chown `whoami`:admin MONGO_DB_DIR
+sudo chmod u+xw MONGO_DB_DIR 
