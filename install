@@ -161,5 +161,15 @@ if ask "Would you like to symlink zsh?" Y; then
 
 fi
 
+TMUX=~/.tmux.conf
+if ask "Would you like to symlink tmux config?" Y; then
+	if [ -f $TMUX ]; then
+		echo "Backing up .tmux.conf"
+		mv $TMUX $TMUX.bak
+	fi
+	echo "Symlinking .tmux.conf"
+	ln -sf $PWD/tmux/tmux.conf $TMUX
+fi
 
-echo "Please restart your terminal for some settings to take effect"
+
+echo "Please restart your terminal for all settings to take effect"
