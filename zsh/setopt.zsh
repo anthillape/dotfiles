@@ -59,12 +59,12 @@ setopt auto_menu
 setopt complete_in_word
 
 # Do not autoselect the first completion entry
-unsetopt menu_complete
+setopt no_menu_complete
 
 ## Correction ##
 
 # Switch off correction for arguments
-unsetopt correct_all
+setopt no_correct_all
 
 # Switch on correction for commands
 setopt correct

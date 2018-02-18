@@ -1,7 +1,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-unsetopt beep
 bindkey -v
 zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
@@ -17,6 +16,9 @@ source $(brew --prefix nvm)/nvm.sh
 
 # Set options
 source ~/.zsh/setopt.zsh
+
+# Set aliases
+source ~/.zsh/alias.zsh
 
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh

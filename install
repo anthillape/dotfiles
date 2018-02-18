@@ -139,6 +139,9 @@ ZSHENV=~/.zshenv
 if ask "Would you like to symlink zsh?" Y; then
 	if [ -d $ZSH_DIR ]; then
 		echo "Backing up .zsh directory"
+		if [ -d $ZSH_DIR.bak ]; then
+			rm -rf $ZSH_DIR.bak
+		fi
 		mv $ZSH_DIR $ZSH_DIR.bak
 	fi
 	if [ -f $ZSHRC ]; then
@@ -151,14 +154,16 @@ if ask "Would you like to symlink zsh?" Y; then
 	fi
 
 	echo "Symlinking .zsh directory"
-	ln -snf $PWD/zsh $SLATE
+	ln -snf $PWD/zsh $ZSH_DIR
 
 	echo "Symlinking .zshrc"
-	ln -sf $PWD/zsh/.zshrc $ZSHRC
+	ln -sf $PWD/zsh/zshrc $ZSHRC
 
 	echo "Symlinking .zshenv"
-	ln -sf $PWD/zsh/.zshenv $ZSHENV
-
+	ln -sf $PWD/zsh/zshenv $ZSHENV
+	
+	echo "Applying config"
+	source $ZSHRC
 fi
 
 TMUX=~/.tmux.conf
