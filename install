@@ -3,8 +3,11 @@
 # The aim of this script is to be able to run it once to set up a mac
 # and again at any time to update
 
-# Load functions
-source ./functions.sh
+# Bail out if the user is not on a mac
+if [ $(uname) != "Darwin" ]; then
+	echo "This script only works for mac, exiting"
+	exit 1
+fi
 
 # TODO
 # - List apps requiring update and provide option to update or not
@@ -17,6 +20,19 @@ source ./functions.sh
 # set -x will print out each command before running it
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -euo pipefail
+
+# Load functions
+source ./functions.sh
+
+if [ ! -d /Library/Developer/CommandLineTools ]; then
+	if ask "Would you like to install xcode command line tools (required)?" Y; then
+		xcode-select --install
+	else
+		echo "Command line tools are required, you may run them separately with 'xcode-select --install"
+		exit 1
+	fi
+fi
+
 
 # You will need to make sure there is a Frameworks directory
 # This this brew may fail
@@ -161,9 +177,8 @@ if ask "Would you like to symlink zsh?" Y; then
 
 	echo "Symlinking .zshenv"
 	ln -sf $PWD/zsh/zshenv $ZSHENV
-	
-	echo "Applying config"
-	source $ZSHRC
+
+	echo "You will need to restart / reload your shell for zsh to update"
 fi
 
 TMUX=~/.tmux.conf

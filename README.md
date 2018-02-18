@@ -23,16 +23,11 @@ git
 yarn
 nvm
 
-#### Vim plugins
-
-neomake for linting
-
-
 ### Style
 
 Meslo with nerd font extensions
 Pure theme
-Solarized dark
+Gotham
 
 ### Inspired by
 William Durand https://github.com/willdurand
@@ -43,3 +38,4 @@ Gianni Chiappetta https://github.com/gf3
 Ham Vocke http://www.hamvocke.com/
 Brian P.Hogan http://bphogan.com/
 Deian Isac https://medium.com/@deianisac/
+Mark Nichols https://github.com/zanshin
