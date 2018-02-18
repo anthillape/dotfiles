@@ -1,10 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 # The aim of this script is to be able to run it once to set up a mac
 # and again at any time to update
 
+# Load functions
+source ./functions.sh
+
 # TODO
-# - Add all app store apps with mas
 # - List apps requiring update and provide option to update or not
 
 # Make this script behave more like a proper language
@@ -14,61 +16,150 @@
 # set -u will bail out if there are unset variables
 # set -x will print out each command before running it
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
-set -euxo pipefail
+set -euo pipefail
 
 # You will need to make sure there is a Frameworks directory
 # This this brew may fail
 
-if test ! -d "/usr/local/Frameworks"
-then
-  sudo mkdir /usr/local/Frameworks
-  sudo chown $(logname) /usr/local/Frameworks
+if [ ! -d "/usr/local/Frameworks" ]; then
+	echo "Creating missing /usr/local/Frameworks directory"
+	sudo mkdir /usr/local/Frameworks
+	sudo chown $(logname) /usr/local/Frameworks
 fi
 
 # Test to see if homebrew is installed, if not install it
-if test ! $(which brew)
-then
-  echo "  Installing Homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
+if [ ! $(which brew) ]; then
+	echo "Installing Homebrew"
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
+else
+	echo "Homebrew already installed, skipping installation"
 fi
 
-# Update recipies
-brew update
+if ask "Would you like to install apps?" Y; then
+	
+	echo "Updating and installing brew/cask/mas apps"
+	# Update recipies
+	brew update
 
-# Update installed formulae
-brew upgrade
+	# Update installed formulae
+	brew upgrade
 
-# Run brew bundle from Brewfile
-# Since brew will return an error state if anything fails we should continue
-# hence the || true
-brew bundle || true
+	# Run brew bundle from Brewfile
+	# Since brew will return an error state if anything fails we should continue
+	# hence the || true
+	brew bundle || true
 
-# Clean up brew, the '-s' option clears the cache, including latest versions
-brew cleanup -s
+	# Clean up brew, the '-s' option clears the cache, including latest versions
+	brew cleanup -s
 
-# Clean up brew cask
-brew cask cleanup
+	# Clean up brew cask
+	brew cask cleanup
+else
+	echo "Skipping update / installation of brew/cask/mas apps"
+fi
 
 # Add zsh to list of valid login shells at /etc/shells 
 # tee is used so we can write to a file that is owned by root
 # since using sudo at the beginning would only sudo echo
 # (using sudo -s in this case failed on my setup)
 # Then use chsh -s to change users shell to zsh
-if ! grep -Fxq /usr/local/bin/zsh /etc/shells
-then
+if ! grep -Fxq /usr/local/bin/zsh /etc/shells; then
+	echo "Adding homebrew zsh (usr/local/bin/zsh) to /etc/shells"
 	echo /usr/local/bin/zsh | sudo tee -a /etc/shells > /dev/null
+	echo "Changing default shell to zsh"
 	chsh -s /usr/local/bin/zsh
+else
+	echo "Shell already set to zsh, taking no action"
 fi
 
 # Symlink pure.zsh and async.zsh in $fpath so pure theme has access
-ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
-ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+if [ ! -f /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh ]; then
+	echo "Symlinking async.zsh for pure theme"
+	ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
+else
+	echo "async.zsh already symlinked, taking no action"
+fi
+
+if [ ! -f /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh ]; then
+	echo "Symlinking pure.zsh"
+	ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+else
+	echo "pure.zsh already symlinked, taking no action"
+fi
 
 # Make a directory to store nvm node versions
 mkdir -p ~/.nvm
 
 # Create database directory for mongo
-MONGO_DB_DIR = /data/db
-sudo mkdir -p MONGO_DB_DIR
-sudo chown `whoami`:admin MONGO_DB_DIR
-sudo chmod u+xw MONGO_DB_DIR 
+MONGO_DB_DIR=/data/db
+if [ ! -d $MONGO_DB_DIR ]; then 
+	echo "Creating mongo database and setting permissions"
+	sudo mkdir -p $MONGO_DB_DIR
+	sudo chown `whoami`:admin $MONGO_DB_DIR
+	sudo chmod u+xw $MONGO_DB_DIR 
+else
+	echo "Mongo database already exists, taking no action"
+fi
+
+KARABINER_JSON=~/.config/karabiner/karabiner.json
+if ask "Would you like to symlink karabiner config?" Y; then
+	if [ -f $KARABINER_JSON ]; then
+		echo 'backing up karabiner.json'
+		mv $KARABINER_JSON $KARABINER_JSON.bak
+	else
+		mkdir -p ~/.config/karabiner
+	fi
+	echo 'symlinking karabiner.json'
+	ln -sf $PWD/karabiner.json $KARABINER_JSON
+fi
+
+SLATE=~/.slate
+if ask "Would you like to symlink slate config?" Y; then
+	if [ -f $SLATE ]; then
+		echo "Backing up .slate"
+		mv $SLATE $SLATE.bak
+	fi
+	echo "Symlinking .slate"
+	ln -sf $PWD/slate $SLATE
+fi
+
+SSH=~/.ssh/config
+if ask "Would you like to symlink ssh config?" Y; then
+	if [ -f $SSH ]; then
+		echo "Backing up .ssh/config"
+		mv $SSH $SSH.bak
+	fi
+	echo "Symlinking .ssh/config"
+	ln -sf $PWD/ssh/config $SLATE
+fi
+
+ZSH_DIR=~/.zsh
+ZSHRC=~/.zshrc
+ZSHENV=~/.zshenv
+if ask "Would you like to symlink zsh?" Y; then
+	if [ -d $ZSH_DIR ]; then
+		echo "Backing up .zsh directory"
+		mv $ZSH_DIR $ZSH_DIR.bak
+	fi
+	if [ -f $ZSHRC ]; then
+		echo "Backing up .zshrc"
+		mv $ZSHRC $ZSHRC.bak
+	fi
+	if [ -f $ZSHENV ]; then
+		echo "Backing up .zshenv"
+		mv $ZSHENV $ZSHENV.bak
+	fi
+
+	echo "Symlinking .zsh directory"
+	ln -snf $PWD/zsh $SLATE
+
+	echo "Symlinking .zshrc"
+	ln -sf $PWD/zsh/.zshrc $ZSHRC
+
+	echo "Symlinking .zshenv"
+	ln -sf $PWD/zsh/.zshenv $ZSHENV
+
+fi
+
+
+echo "Please restart your terminal for some settings to take effect"
