@@ -10,6 +10,25 @@ I intend to document every step heavily so even people new to the command line
 are able to understand what's going on (and more to the point myself when 
 trying to edit any of this later)
 
+### Installation
+
+Make install runnable with
+```
+chmod u+x install
+```
+then run install
+```
+./install
+```
+and follow the on screen instructions.
+
+## Iterm
+
+To get your iterm config working you need to open preferences > general.
+At the bottom check 'Load preferences from a custom folder or URL'
+This should open a file open dialog, here select the file
+`iterm2/com.googlecode.iterm2.plist` in this repo.
+
 ### Stack
 
 zsh

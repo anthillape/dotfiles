@@ -51,27 +51,77 @@ else
 	echo "Homebrew already installed, skipping installation"
 fi
 
-if ask "Would you like to install apps?" Y; then
-	
+cat <<END_OF_HEREDOC
+
+Next up we are going to install all the apps.
+For command line apps we will use brew.
+For gui apps that are not on the app store we use brew cask.
+For app store apps we will use mas-cli.
+
+Note that for mas-cli to work you will need to be signed in
+to the app store, if you attempt to sign in with mas-cli
+from the command line it will likely fail, and you will have
+to sign in manually to the app store after a system hard boot.
+
+After signing in you should go to
+System Preferences -> App Store -> Password Settings,
+and change "Purchases and In-app Purchases" to "Require After 15 minutes"
+and "Free Downloads" to "Save Password".
+
+END_OF_HEREDOC
+
+loginToAppStore
+
+if ask "Would you like to update and upgrade apps first?" Y; then
 	echo "Updating and installing brew/cask/mas apps"
 	# Update recipies
 	brew update
 
 	# Update installed formulae
 	brew upgrade
+fi
 
-	# Run brew bundle from Brewfile
-	# Since brew will return an error state if anything fails we should continue
-	# hence the || true
-	brew bundle || true
+echo -e "\nChecking brew dependencies..."
+# Checking brew apps are up to date with Brewfile list,
+# "> /dev/null 2>&1" suppresses STDOUT and STDERR so they
+# are not printed out to the user
+if brew bundle check --file=brewfiles/Brewfile > /dev/null 2>&1; then
+	echo "Brew dependencies up to date"
+else
+	echo "Brew dependencies missing" 
+	if ask "Would you like to install cli apps with brew?" Y; then
+		brew bundle --file=brewfiles/Brewfile
+	fi
+fi
 
+echo -e "\nChecking cask dependencies..."
+if brew bundle check --file=brewfiles/Caskfile > /dev/null 2>&1; then
+	echo "Cask dependencies up to date"
+else
+	echo "Cask dependencies missing" 
+	if ask "Would you like to install gui apps with cask?" Y; then
+		# using "|| true", because an app may already be installed and we shouldn't stop the script
+		brew bundle --file=brewfiles/Caskfile || true
+	fi
+fi
+
+echo -e "\nChecking mas-cli dependencies..."
+if brew bundle check --file=brewfiles/Masfile > /dev/null 2>&1; then
+	echo "Mas dependencies up to date"
+else
+	echo "Mas dependencies missing" 
+	if ask "Would you like to install app store apps with mas-cli? (remember to sign in to the app store first)" Y; then
+		# using "|| true", because an app may already be installed and we shouldn't stop the script
+		brew bundle --file=brewfiles/Masfile || true
+	fi
+fi
+
+if ask "Would you like to cleanup unused brew / cask / mas apps?" Y; then
 	# Clean up brew, the '-s' option clears the cache, including latest versions
 	brew cleanup -s
 
 	# Clean up brew cask
 	brew cask cleanup
-else
-	echo "Skipping update / installation of brew/cask/mas apps"
 fi
 
 # Add zsh to list of valid login shells at /etc/shells 
@@ -118,78 +168,105 @@ else
 fi
 
 KARABINER_JSON=~/.config/karabiner/karabiner.json
-if ask "Would you like to symlink karabiner config?" Y; then
-	if [ -f $KARABINER_JSON ]; then
-		echo 'backing up karabiner.json'
-		mv $KARABINER_JSON $KARABINER_JSON.bak
-	else
-		mkdir -p ~/.config/karabiner
+if [[ -L $KARABINER_JSON && "$(readlink $KARABINER_JSON)" = "$PWD/karabiner.json" ]]; then
+	echo "karabiner already symlinked, taking no action"
+else
+	if ask "Would you like to symlink karabiner config?" Y; then
+		if [ -f $KARABINER_JSON ]; then
+			echo 'backing up karabiner.json'
+			mv $KARABINER_JSON $KARABINER_JSON.bak
+		else
+			mkdir -p ~/.config/karabiner
+		fi
+		echo 'symlinking karabiner.json'
+		ln -sf $PWD/karabiner.json $KARABINER_JSON
 	fi
-	echo 'symlinking karabiner.json'
-	ln -sf $PWD/karabiner.json $KARABINER_JSON
 fi
 
 SLATE=~/.slate
-if ask "Would you like to symlink slate config?" Y; then
-	if [ -f $SLATE ]; then
-		echo "Backing up .slate"
-		mv $SLATE $SLATE.bak
+if [[ -L $SLATE && "$(readlink $SLATE)" = "$PWD/slate" ]]; then
+	echo "slate already symlinked, taking no action"
+else
+	if ask "Would you like to symlink slate config?" Y; then
+		if [ -f $SLATE ]; then
+			echo "Backing up .slate"
+			mv $SLATE $SLATE.bak
+		fi
+		echo "Symlinking .slate"
+		ln -sf $PWD/slate $SLATE
 	fi
-	echo "Symlinking .slate"
-	ln -sf $PWD/slate $SLATE
 fi
 
 SSH=~/.ssh/config
-if ask "Would you like to symlink ssh config?" Y; then
-	if [ -f $SSH ]; then
-		echo "Backing up .ssh/config"
-		mv $SSH $SSH.bak
+if [[ -L $SSH && "$(readlink $SSH)" = "$PWD/ssh/config" ]]; then
+	echo "ssh already symlinked, taking no action"
+else
+	if ask "Would you like to symlink ssh config?" Y; then
+		if [ -f $SSH ]; then
+			echo "Backing up .ssh/config"
+			mv $SSH $SSH.bak
+		fi
+		echo "Symlinking .ssh/config"
+		ln -sf $PWD/ssh/config $SSH
 	fi
-	echo "Symlinking .ssh/config"
-	ln -sf $PWD/ssh/config $SLATE
 fi
 
 ZSH_DIR=~/.zsh
 ZSHRC=~/.zshrc
 ZSHENV=~/.zshenv
-if ask "Would you like to symlink zsh?" Y; then
-	if [ -d $ZSH_DIR ]; then
-		echo "Backing up .zsh directory"
-		if [ -d $ZSH_DIR.bak ]; then
-			rm -rf $ZSH_DIR.bak
+if [[ -L $ZSHRC && "$(readlink $ZSHRC)" = "$PWD/zsh/zshrc" && -L $ZSHENV && -L $ZSH_DIR ]]; then
+	echo "zsh already symlinked, taking no action"
+else
+	if ask "Would you like to symlink zsh?" Y; then
+		if [ -d $ZSH_DIR ]; then
+			echo "Backing up .zsh directory"
+			if [ -d $ZSH_DIR.bak ]; then
+				rm -rf $ZSH_DIR.bak
+			fi
+			mv $ZSH_DIR $ZSH_DIR.bak
 		fi
-		mv $ZSH_DIR $ZSH_DIR.bak
+		if [ -f $ZSHRC ]; then
+			echo "Backing up .zshrc"
+			mv $ZSHRC $ZSHRC.bak
+		fi
+		if [ -f $ZSHENV ]; then
+			echo "Backing up .zshenv"
+			mv $ZSHENV $ZSHENV.bak
+		fi
+
+		echo "Symlinking .zsh directory"
+		ln -snf $PWD/zsh $ZSH_DIR
+
+		echo "Symlinking .zshrc"
+		ln -sf $PWD/zsh/zshrc $ZSHRC
+
+		echo "Symlinking .zshenv"
+		ln -sf $PWD/zsh/zshenv $ZSHENV
+
+		echo "You will need to restart / reload your shell for zsh to update"
 	fi
-	if [ -f $ZSHRC ]; then
-		echo "Backing up .zshrc"
-		mv $ZSHRC $ZSHRC.bak
-	fi
-	if [ -f $ZSHENV ]; then
-		echo "Backing up .zshenv"
-		mv $ZSHENV $ZSHENV.bak
-	fi
-
-	echo "Symlinking .zsh directory"
-	ln -snf $PWD/zsh $ZSH_DIR
-
-	echo "Symlinking .zshrc"
-	ln -sf $PWD/zsh/zshrc $ZSHRC
-
-	echo "Symlinking .zshenv"
-	ln -sf $PWD/zsh/zshenv $ZSHENV
-
-	echo "You will need to restart / reload your shell for zsh to update"
 fi
 
 TMUX=~/.tmux.conf
-if ask "Would you like to symlink tmux config?" Y; then
-	if [ -f $TMUX ]; then
-		echo "Backing up .tmux.conf"
-		mv $TMUX $TMUX.bak
+if [[ -L $TMUX && "$(readlink $TMUX)" = "$PWD/tmux/tmux.conf" ]]; then
+	echo "tmux already symlinked, taking no action"
+else
+	if ask "Would you like to symlink tmux config?" Y; then
+
+		if [ -f $TMUX ]; then
+			echo "Backing up .tmux.conf"
+			mv $TMUX $TMUX.bak
+		fi
+		echo "Symlinking .tmux.conf"
+		ln -sf $PWD/tmux/tmux.conf $TMUX
 	fi
-	echo "Symlinking .tmux.conf"
-	ln -sf $PWD/tmux/tmux.conf $TMUX
 fi
 
+if ask "Would you like to install the latest node (with nvm) and switch to it?" Y; then
+	export NVM_DIR=~/.nvm
+	source $(brew --prefix nvm)/nvm.sh
+	nvm install node
+	nvm use node
+fi
 
 echo "Please restart your terminal for all settings to take effect"

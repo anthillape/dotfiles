@@ -1,0 +1,41 @@
+# Installs macOS apps using brew cask
+# Usage `brew bundle Caskfile`
+cask_args appdir: "/Applications"
+
+# Add formulae repositories
+tap "caskroom/fonts"
+tap "caskroom/cask"
+
+# Add iterm
+cask "iterm2"
+
+# Add nerd font patched meslo fonts
+cask "caskroom/fonts/font-meslo-nerd-font-mono"
+
+# Add caffeine, app to stop mac going to sleep
+cask "caffeine"
+
+# Add dropbox
+cask "dropbox"
+
+# Add flux, which warms screen colours at night
+cask "flux"
+
+# Add imageoptim, image file size reducer
+cask "imageoptim"
+
+# Add kakapo, an ambient sound mixer / player
+cask "kakapo"
+
+# Add karabiner-elements (the karabiner cask is old
+cask "karabiner-elements"
+
+# Add little snitch, to keep an eye on your network
+cask "little-snitch"
+
+# Add slate, a window position manager
+cask "slate"
+
+# Add some browsers for testing
+cask "firefox"
+cask "google-chrome"

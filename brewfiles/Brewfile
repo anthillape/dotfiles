@@ -1,18 +1,8 @@
-# Installs macOS apps using brew, brew cask, and mas
-# Usage `brew bundle Caskfile`
-cask_args appdir: "/Applications"
+# Installs macOS apps using brew
 
 # Add formulae repositories
 tap "homebrew/core"
 tap "homebrew/bundle"
-tap "caskroom/fonts"
-tap "caskroom/cask"
-
-# This installs the GNU coreutils which are are more comprehensive
-# than those on BSD (which is what Darwin, the underlying kernel of macOS, is)
-# See https://www.topbug.net/blog/2013/04/14/install-and-use-gnu-command-line-tools-in-mac-os-x/
-# This is required for tools like 'realpath'
-brew "coreutils"
 
 # Add cask, for installing non-cli apps that are not on the app store
 brew "cask"
@@ -83,44 +73,3 @@ brew "zplug"
 
 # Add z shell
 brew "zsh"
-
-# Add iterm
-cask "iterm2"
-
-# Add nerd font patched meslo fonts
-cask "caskroom/fonts/font-meslo-nerd-font-mono"
-
-# Add caffeine, app to stop mac going to sleep
-cask "caffeine"
-
-# Add dropbox
-cask "dropbox"
-
-# Add flux, which warms screen colours at night
-cask "flux"
-
-# Add imageoptim, image file size reducer
-cask "imageoptim"
-
-# Add kakapo, an ambient sound mixer / player
-cask "kakapo"
-
-# Add karabiner-elements (the karabiner cask is old
-cask "karabiner-elements"
-
-# Add little snitch, to keep an eye on your network
-cask "little-snitch"
-
-# Add slate, a window position manager
-cask "slate"
-
-# Add some browsers for testing
-cask "firefox"
-cask "google-chrome"
-
-# Add some app store apps
-mas "1Password", id: 443987910
-mas "iA Writer", id: 775737590
-mas "Soulver", id: 413965349
-mas "Todoist", id: 585829637
-
