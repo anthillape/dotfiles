@@ -6,8 +6,6 @@ zplug "tmux-plugins/tmux-sensible"
 # Add async for the pure theme
 zplug mafredri/zsh-async, from:github
 
-# zplug "lib/completion", from:oh-my-zsh
-
 # Add plugin that tells you if a command you wrote already has an alias
 zplug "MichaelAquilina/zsh-you-should-use"
 
@@ -27,9 +25,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # Allow substring matches when searching history
 # This must be loaded after zsh-syntax-highlighting
 zplug "zsh-users/zsh-history-substring-search", defer:2
-
-# Git plugin from ohmyzsh
-zplug "plugins/git", from:oh-my-zsh
 
 # Add oh-my-zsh style ... to go up many levels
 zplug "knu/zsh-manydots-magic"
