@@ -15,13 +15,11 @@ compinit
 autoload -Uz manydots-magic
 manydots-magic
 
-export NVM_DIR=~/.nvm
-
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-# Load nvm
-source $(brew --prefix nvm)/nvm.sh
+# Lazy load nvm so it doesn't load when you open a new shell
+export NVM_LAZY_LOAD=true
 
 # Set options
 source ~/.zsh/setopt.zsh

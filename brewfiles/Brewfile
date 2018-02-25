@@ -28,9 +28,6 @@ brew "mongodb"
 # Add neovim, a refactored, async vim
 brew "neovim"
 
-# Add nvm (better multi env support than n)
-brew "nvm"
-
 # Add ruby version manager
 brew "rbenv"
 
