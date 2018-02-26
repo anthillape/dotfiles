@@ -259,5 +259,34 @@ else
 	fi
 fi
 
+NVIM=~/.config/nvim/init.vim
+if [[ -L $NVIM && "$(readlink $NVIM)" = "$PWD/nvim/init.vim" ]]; then
+	echo "nvim already symlinked, taking no action"
+else
+	if ask "Would you like to symlink nvim config?" Y; then
+
+		if [ -f $NVIM ]; then
+			echo "Backing up init.vim"
+			mv $NVIM $NVIM.bak
+		else
+			mkdir -p ~/.config/nvim
+		fi
+		echo "Symlinking init.vim"
+		ln -sf $PWD/nvim/init.vim $NVIM
+	fi
+fi
+
+PLUG=~/.local/share/nvim/site/autoload/plug.vim
+if [[ -f $PLUG ]]; then
+	echo "Vim plug already installed, taking no action"
+else
+	if ask "Would you like to install vim plug" Y; then
+		curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		# Install plugins
+		command nvim +PlugInstall +qall
+	fi
+fi
+
 
 echo "Please restart your terminal for all settings to take effect"
