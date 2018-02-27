@@ -5,7 +5,7 @@
 # Allow cd to directory with just directory name
 setopt auto_cd
 
-# Switch of audible beep on error
+# Switch off audible beep on error
 setopt no_beep
 
 # Where argument to cd is a cd-able variable, go there 
@@ -66,7 +66,7 @@ setopt no_menu_complete
 # Switch off correction for arguments
 setopt no_correct_all
 
-# Switch on correction for commands
-setopt correct
+# Switch off correction for commands
+setopt no_correct
 
 
