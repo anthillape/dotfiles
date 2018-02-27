@@ -288,5 +288,25 @@ else
 	fi
 fi
 
+if ask "Would you like to install python and ruby versions" Y; then
+  # Install version of ruby / python required for plugins
+  rbenv install 2.5.0
+  pyenv install 2.7.11
+  pyenv install 3.5.2
+  # Create virtualenv directories `neovimX` for each version of python
+  pyenv virtualenv 2.7.11 neovim2
+  pyenv virtualenv 3.5.2 neovim3
+  # Activate the python 2 environment
+  pyenv activate neovim2
+  # install python2 neovim module
+  pip install neovim
+  PYTHON2_PATH=pyenv which python
+
+  # Activate the python 3 environment
+  pyenv activate neovim3
+  # install python3 neovim module
+  pip install neovim
+  PYTHON3_PATH=pyenv which python
+fi
 
 echo "Please restart your terminal for all settings to take effect"
