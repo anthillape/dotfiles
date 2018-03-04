@@ -419,8 +419,6 @@ else
   echo "neovim already installed to $PYTHON2_VIRTUALENV, taking no action"
 fi
 
-PYTHON2_PATH=$(pyenv which python)
-echo -e "\nYour vim.init should contain the line:\nlet g:python_host_prog = '$PYTHON2_PATH'\n"
 # Deactivate python env
 set +u
 source deactivate > /dev/null 2>&1
@@ -465,8 +463,6 @@ else
   echo "neovim already installed to $PYTHON3_VIRTUALENV, taking no action"
 fi
 
-PYTHON3_PATH=$(pyenv which python)
-echo -e "\nYour vim.init should contain the line:\nlet g:python3_host_prog = '$PYTHON3_PATH'\n"
 # Deactivate python env
 set +u
 source deactivate > /dev/null 2>&1
