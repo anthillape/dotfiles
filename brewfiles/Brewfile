@@ -37,6 +37,9 @@ brew "pyenv"
 # Add pyenv / virtualenv integration 
 brew "pyenv-virtualenv", args: ["--HEAD"]
 
+# Add readline pyenv requirement
+brew "readline"
+
 # Add wrapper to let tmux use pbcopy and pbpaste
 brew "reattach-to-user-namespace"
 
@@ -61,6 +64,9 @@ brew "watchman"
 
 # Add file downloader
 brew "wget"
+
+# Add xz pyenv requirement
+brew "xz"
 
 # Add npm replacement yarn
 brew "yarn", args: ["without-node"]

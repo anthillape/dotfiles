@@ -80,40 +80,41 @@ if ask "Would you like to update and upgrade apps first?" Y; then
 	# Update installed formulae
 	brew upgrade
 fi
+if ask "Would you like to check/update brew/cask/mas dependencies?" Y; then
+  echo -e "\nChecking brew dependencies..."
+  # Checking brew apps are up to date with Brewfile list,
+  # "> /dev/null 2>&1" suppresses STDOUT and STDERR so they
+  # are not printed out to the user
+  if brew bundle check --file=brewfiles/Brewfile > /dev/null 2>&1; then
+    echo "Brew dependencies up to date"
+  else
+    echo "Brew dependencies missing" 
+    if ask "Would you like to install cli apps with brew?" Y; then
+      brew bundle --file=brewfiles/Brewfile
+    fi
+  fi
 
-echo -e "\nChecking brew dependencies..."
-# Checking brew apps are up to date with Brewfile list,
-# "> /dev/null 2>&1" suppresses STDOUT and STDERR so they
-# are not printed out to the user
-if brew bundle check --file=brewfiles/Brewfile > /dev/null 2>&1; then
-	echo "Brew dependencies up to date"
-else
-	echo "Brew dependencies missing" 
-	if ask "Would you like to install cli apps with brew?" Y; then
-		brew bundle --file=brewfiles/Brewfile
-	fi
-fi
+  echo -e "\nChecking cask dependencies..."
+  if brew bundle check --file=brewfiles/Caskfile > /dev/null 2>&1; then
+    echo "Cask dependencies up to date"
+  else
+    echo "Cask dependencies missing" 
+    if ask "Would you like to install gui apps with cask?" Y; then
+      # using "|| true", because an app may already be installed and we shouldn't stop the script
+      brew bundle --file=brewfiles/Caskfile || true
+    fi
+  fi
 
-echo -e "\nChecking cask dependencies..."
-if brew bundle check --file=brewfiles/Caskfile > /dev/null 2>&1; then
-	echo "Cask dependencies up to date"
-else
-	echo "Cask dependencies missing" 
-	if ask "Would you like to install gui apps with cask?" Y; then
-		# using "|| true", because an app may already be installed and we shouldn't stop the script
-		brew bundle --file=brewfiles/Caskfile || true
-	fi
-fi
-
-echo -e "\nChecking mas-cli dependencies..."
-if brew bundle check --file=brewfiles/Masfile > /dev/null 2>&1; then
-	echo "Mas dependencies up to date"
-else
-	echo "Mas dependencies missing" 
-	if ask "Would you like to install app store apps with mas-cli? (remember to sign in to the app store first)" Y; then
-		# using "|| true", because an app may already be installed and we shouldn't stop the script
-		brew bundle --file=brewfiles/Masfile || true
-	fi
+  echo -e "\nChecking mas-cli dependencies..."
+  if brew bundle check --file=brewfiles/Masfile > /dev/null 2>&1; then
+    echo "Mas dependencies up to date"
+  else
+    echo "Mas dependencies missing" 
+    if ask "Would you like to install app store apps with mas-cli? (remember to sign in to the app store first)" Y; then
+      # using "|| true", because an app may already be installed and we shouldn't stop the script
+      brew bundle --file=brewfiles/Masfile || true
+    fi
+  fi
 fi
 
 if ask "Would you like to cleanup unused brew / cask / mas apps?" Y; then
@@ -239,6 +240,8 @@ else
 
 		echo "Symlinking .zshenv"
 		ln -sf $PWD/zsh/zshenv $ZSHENV
+                
+                # zsh cannot be reloaded here as this is a bash script
 
 		echo "You will need to restart / reload your shell for zsh to update"
 	fi
@@ -288,25 +291,115 @@ else
 	fi
 fi
 
-if ask "Would you like to install python and ruby versions" Y; then
-  # Install version of ruby / python required for plugins
-  rbenv install 2.5.0
+if [[ $(xcode-select -p) == '/Applications/Xcode.app/Contents/Developer' ]]; then
+  if pkgutil --pkg-info com.apple.pkg.CLTools_Executables >/dev/null 2>&1; then
+    echo "Command line tools already installed, taking no action"
+  else
+    if ask "Would you like to install command line tools?" Y; then
+      echo "Installing command line tools"
+      xcode-select --install
+    fi
+  fi
+else
+  echo "Xcode not installed, aborting command line tools install" >&2
+  exit 1
+fi 
+
+RUBY_VERSION=2.5.0
+# We need ruby to support neovim plugins that use ruby, this requires
+# the ruby neovim provider to be setup and the neovim ruby gem
+# to be installed.
+
+# Check that desired version of ruby is installed
+if [[ ! $(rbenv versions | grep $RUBY_VERSION) ]]; then
+  if ask "Would you like to install ruby version $RUBY_VERSION?" Y; then
+    # --verbose because this can take a while and without it
+    # there would be no feeback that anything is happening
+    echo "Installing ruby version $RUBY_VERSION"
+    rbenv install $RUBY_VERSION --verbose
+  fi
+else
+  echo "Ruby version $RUBY_VERSION already installed, taking no action"
+fi
+
+# Check that global ruby version is set correctly
+if [[ ! ($(rbenv global) = $RUBY_VERSION) ]]; then
+  if ask "Would you like to set global ruby version to $RUBY_VERSION?" Y; then
+    echo "Setting global ruby version in ~/.rbenv/version"
+    rbenv global $RUBY_VERSION
+    rbenv rehash
+  fi
+else
+  echo "Ruby version already set to $RUBY_VERSION, taking no action"
+fi
+
+# Check that the ruby neovim library is available
+if [[ ! $(gem which neovim) ]]; then
+  if ask "Would you like to install the ruby neovim module?" Y; then
+    gem install neovim
+  fi
+else
+  echo "Ruby neovim module already installed, taking no action"
+fi
+
+NODE_VERSION=9.6.1
+# Load nvm into this shell
+# The nvm.sh script contains unbound variables so we use `set +u`
+# to disable checks for these that would cause the script to
+# bail out.
+set +u
+source ~/.nvm/nvm.sh
+# Check that correct node version is installed
+if [[ ! $(nvm version v$NODE_VERSION) = v$NODE_VERSION ]]; then
+  if ask "Would you like to install node $NODE_VERSION?" Y; then
+    echo "Installing node version $NODE_VERSION"
+    nvm install $NODE_VERSION
+  fi
+else
+  echo "Node version $NODE_VERSION already installed, taking no action" 
+fi
+
+# Make sure the shell is using the correct version of node
+if [[ ! $(nvm current) = v$NODE_VERSION ]]; then
+  if ask "Would you like to switch to node $NODE_VERSION?" Y; then
+    echo "Using node version $NODE_VERSION"
+    nvm use $NODE_VERSION
+  fi
+else
+  echo "Node version $NODE_VERSION already in use, taking no action" 
+fi
+
+# Switch unbound variable checks back on as we are done with nvm
+set -u
+
+if [[ ! $(yarn global list | grep neovim) ]]; then
+  if ask "Would you like to install the node neovim module?" Y; then
+    yarn global add neovim
+  fi
+else
+  echo "Node neovim module already installed, taking no action"
+fi
+
+if ask "Would you like to install python versions" Y; then
+  # Install version of python required for plugins
   pyenv install 2.7.11
   pyenv install 3.5.2
   # Create virtualenv directories `neovimX` for each version of python
-  pyenv virtualenv 2.7.11 neovim2
+  pyenv virtualenv 2.7.11 neovim2 
   pyenv virtualenv 3.5.2 neovim3
   # Activate the python 2 environment
   pyenv activate neovim2
   # install python2 neovim module
   pip install neovim
   PYTHON2_PATH=pyenv which python
-
+  # Add python 2 interpreter path to init.vim
+  
   # Activate the python 3 environment
   pyenv activate neovim3
   # install python3 neovim module
   pip install neovim
   PYTHON3_PATH=pyenv which python
+  # Add python 2 interpreter path to init.vim
 fi
 
-echo "Please restart your terminal for all settings to take effect"
+echo "Some dependencies may require a restart to take effect"

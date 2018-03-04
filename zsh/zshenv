@@ -1,8 +1,6 @@
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+# This file is sourced before .zshrc and will always be sourced
+# ie for interactive/non-interactive, and login/non-login shells
+# It is sourced before all other zsh dot files so we should be
+# careful setting our PATH here as it may be overridden by
+# anything in those files.
 
-if command -v rbenv 1>/dev/null 2>&1; then
-  eval "$(rbenv init -)"
-fi

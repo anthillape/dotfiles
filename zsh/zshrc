@@ -1,3 +1,8 @@
+# This file is sourced for interactive shells only (both login and non-login)
+# It is sourced after .zshenv
+# If this is a login shell, then .zprofile will be sourced directly before it
+# and .zlogin will be sourced after
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -30,8 +35,23 @@ source ~/.zsh/setopt.zsh
 # Set aliases
 source ~/.zsh/alias.zsh
 
+# Prepend pyenv and rbenv shims to PATH, this is not done in 
+# .zshenv as .zshenv is sourced first, so we would not be
+# able to guarantee that the shims are first on the PATH
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+if command -v rbenv 1>/dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
+
+
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh
+
+
 
 if ! zplug check; then
     zplug install
