@@ -380,26 +380,96 @@ else
   echo "Node neovim module already installed, taking no action"
 fi
 
-if ask "Would you like to install python versions" Y; then
-  # Install version of python required for plugins
-  pyenv install 2.7.11
-  pyenv install 3.5.2
-  # Create virtualenv directories `neovimX` for each version of python
-  pyenv virtualenv 2.7.11 neovim2 
-  pyenv virtualenv 3.5.2 neovim3
-  # Activate the python 2 environment
-  pyenv activate neovim2
-  # install python2 neovim module
-  pip install neovim
-  PYTHON2_PATH=pyenv which python
-  # Add python 2 interpreter path to init.vim
-  
-  # Activate the python 3 environment
-  pyenv activate neovim3
-  # install python3 neovim module
-  pip install neovim
-  PYTHON3_PATH=pyenv which python
-  # Add python 2 interpreter path to init.vim
+# Install python2 for neovim plugins
+PYTHON2_VERSION=2.7.11
+
+# Check that desired version of python2 is installed
+if [[ ! $(pyenv versions | grep $PYTHON2_VERSION) ]]; then
+  if ask "Would you like to install python version $PYTHON2_VERSION?" Y; then
+    # --verbose because this can take a while and without it
+    # there would be no feeback that anything is happening
+    echo "Installing python version $PYTHON2_VERSION"
+    pyenv install $PYTHON2_VERSION --verbose
+  fi
+else
+  echo "Python version $PYTHON2_VERSION already installed, taking no action"
 fi
 
-echo "Some dependencies may require a restart to take effect"
+# Create virtualenv for python2 
+PYTHON2_VIRTUALENV=neovim2
+if [[ ! $(pyenv virtualenvs | grep $PYTHON2_VIRTUALENV) ]]; then
+  if ask "Would you like to install python2 virtualenv?" Y; then
+    pyenv virtualenv $PYTHON2_VERSION $PYTHON2_VIRTUALENV
+  fi
+else
+  echo "$PYTHON2_VIRTUALENV already exists, taking no action"
+fi
+
+# Install python2 neovim module
+# Enter the neovim2 virtualenv
+set +u
+source ~/.pyenv/versions/$PYTHON2_VIRTUALENV/bin/activate 
+set -u
+if [[ ! $(pip show neovim) ]]; then
+  if ask "Would you like to install neovim module for python2?" Y; then
+    echo "Installing neovim to $PYTHON2_VIRTUALENV virtualenv"
+    pip install neovim
+  fi
+else
+  echo "neovim already installed to $PYTHON2_VIRTUALENV, taking no action"
+fi
+
+PYTHON2_PATH=$(pyenv which python)
+echo -e "\nYour vim.init should contain the line:\nlet g:python_host_prog = '$PYTHON2_PATH'\n"
+# Deactivate python env
+set +u
+source deactivate > /dev/null 2>&1
+set -u
+
+# Install python3 for neovim plugins
+PYTHON3_VERSION=3.5.2
+
+# Check that desired version of python3 is installed
+if [[ ! $(pyenv versions | grep $PYTHON3_VERSION) ]]; then
+  if ask "Would you like to install python version $PYTHON3_VERSION?" Y; then
+    # --verbose because this can take a while and without it
+    # there would be no feeback that anything is happening
+    echo "Installing python version $PYTHON3_VERSION"
+    pyenv install $PYTHON3_VERSION --verbose
+  fi
+else
+  echo "Python version $PYTHON3_VERSION already installed, taking no action"
+fi
+
+# Create virtualenv for python3 
+PYTHON3_VIRTUALENV=neovim3
+if [[ ! $(pyenv virtualenvs | grep $PYTHON3_VIRTUALENV) ]]; then
+  if ask "Would you like to install python3 virtualenv?" Y; then
+    pyenv virtualenv $PYTHON3_VERSION $PYTHON3_VIRTUALENV
+  fi
+else
+  echo "$PYTHON3_VIRTUALENV already exists, taking no action"
+fi
+
+# Install python3 neovim module
+# Enter the neovim3 virtualenv
+set +u
+source ~/.pyenv/versions/$PYTHON3_VIRTUALENV/bin/activate 
+set -u
+if [[ ! $(pip show neovim) ]]; then
+  if ask "Would you like to install neovim module for python3?" Y; then
+    echo "Installing neovim to $PYTHON3_VIRTUALENV virtualenv"
+    pip install neovim
+  fi
+else
+  echo "neovim already installed to $PYTHON3_VIRTUALENV, taking no action"
+fi
+
+PYTHON3_PATH=$(pyenv which python)
+echo -e "\nYour vim.init should contain the line:\nlet g:python3_host_prog = '$PYTHON3_PATH'\n"
+# Deactivate python env
+set +u
+source deactivate > /dev/null 2>&1
+set -u
+
+echo "Some changes may require a restart to take effect"

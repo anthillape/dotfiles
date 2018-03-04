@@ -7,6 +7,11 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Export environment variables for pyenv and rbenv
+# These must use $HOME, not ~
+export PYENV_ROOT="$HOME/.pyenv"
+export RBENV_ROOT="$HOME/.rbenv"
+
 # Set prompt to vi mode 
 bindkey -v
 
