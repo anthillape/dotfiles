@@ -46,6 +46,12 @@ Plug 'tpope/vim-repeat'
 " Add fuzzy find plugin
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+" https://medium.com/usevim/what-is-modern-vim-2591f6b1ec04
+" Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-cm-tern', {'do': 'npm install'}
+
+" Allow use of tmux pane navigation shortcuts to work in vim splits
+Plug 'christoomey/vim-tmux-navigator'
 
 " Initialise plugins
 call plug#end()
