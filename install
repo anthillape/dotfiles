@@ -178,6 +178,9 @@ else
 		fi
 		echo 'symlinking karabiner.json'
 		ln -sf $PWD/karabiner.json $KARABINER_JSON
+                echo 'restarting karabiner daemon'
+                launchctl stop org.pqrs.karabiner.karabiner_console_user_server
+                launchctl start org.pqrs.karabiner.karabiner_console_user_server
 	fi
 fi
 
