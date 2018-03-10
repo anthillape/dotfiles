@@ -56,4 +56,11 @@ Plug 'christoomey/vim-tmux-navigator'
 " Initialise plugins
 call plug#end()
 
+" Auto install missing plugins
+
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
 colorscheme gotham
