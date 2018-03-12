@@ -30,6 +30,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Set visual theme
 Plug 'whatyouhide/vim-gotham'
 
+" Sensible defaults
+Plug 'tpope/vim-sensible'
+
 " Add simple editing of surrounding quotes, tags, brackets etc
 " cs'" replaces surrounding ' with "
 " cst" replaces surrounding tag (eg <p>) with "
