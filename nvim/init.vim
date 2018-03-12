@@ -6,6 +6,9 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+" Set line numbers on by default
+set number
+
 " Specify ruby provider for plugins
 let g:ruby_host_prog = '~/.rbenv/versions/2.5.0/bin/neovim-ruby-host'
 
