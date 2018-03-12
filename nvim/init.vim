@@ -62,8 +62,16 @@ Plug 'christoomey/vim-tmux-navigator'
 " Initialise plugins
 call plug#end()
 
-" Auto install missing plugins
+" Sets relative line numbers on for current buffer
+:set number relativenumber
 
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
+
+" Auto install missing plugins
 autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
