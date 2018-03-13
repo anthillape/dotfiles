@@ -59,8 +59,23 @@ Plug 'tpope/vim-repeat'
 " Allow use of tmux pane navigation shortcuts to work in vim splits
 Plug 'christoomey/vim-tmux-navigator'
 
+" Ale async linter
+Plug 'w0rp/ale'
+
+" Deoplete autocompletion framework, adds autocomplete dropdown
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Add flow support in deoplete
+Plug 'wokalski/autocomplete-flow'
+
+" Function argument completion with flow and deoplete
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
 " Initialise plugins
 call plug#end()
+
+" Enable deoplete
+Plug 'wokalski/autocomplete-flow'
 
 " Sets relative line numbers on for current buffer
 :set number relativenumber
