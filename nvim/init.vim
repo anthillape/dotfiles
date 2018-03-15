@@ -30,6 +30,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Set visual theme
 Plug 'whatyouhide/vim-gotham'
 
+" Add vim airline fancy status line
+Plug 'vim-airline/vim-airline'
+
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
@@ -76,6 +79,9 @@ call plug#end()
 
 " Enable deoplete
 Plug 'wokalski/autocomplete-flow'
+
+" Enable powerline fonts in vim airline
+let g:airline_powerline_fonts = 1
 
 " Sets relative line numbers on for current buffer
 :set number relativenumber
