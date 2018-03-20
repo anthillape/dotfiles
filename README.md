@@ -43,7 +43,8 @@ rbenv
 
 Meslo with nerd font extensions
 Pure theme
-Gotham
+Nord colours
+Vim Airline
 
 ### Notes
 

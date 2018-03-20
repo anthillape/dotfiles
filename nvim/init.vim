@@ -27,11 +27,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " ---- Define plugins ----
 
-" Set visual theme
-Plug 'whatyouhide/vim-gotham'
-
 " Add vim airline fancy status line
 Plug 'vim-airline/vim-airline'
+
+" Add snazzy theme
+Plug 'arcticicestudio/nord-vim'
 
 " Sensible defaults
 Plug 'tpope/vim-sensible'
@@ -98,4 +98,4 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 
-colorscheme gotham
+colorscheme nord
