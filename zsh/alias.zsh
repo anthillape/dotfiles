@@ -16,3 +16,4 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias d='dirs -v' # List last used directories
 
+alias serve='python -m SimpleHTTPServer'
