@@ -10,6 +10,9 @@ brew "cask"
 # Add fuzzy finder, which can later be used in vim to open files in a dir
 brew "fzf"
 
+# Add a url extrator for the tmux plugin https://github.com/tmux-plugins/tmux-urlview
+brew "extract_url"
+
 # Replace builtin macos sed with gnu-sed
 brew "gnu-sed", args: ["with-default-names"]
 
