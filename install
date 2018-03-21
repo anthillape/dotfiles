@@ -70,6 +70,21 @@ and "Free Downloads" to "Save Password".
 
 END_OF_HEREDOC
 
+# Check for either Xcode command line tools, or command line tools without xcode
+if [[ ($(xcode-select -p) == '/Applications/Xcode.app/Contents/Developer') || ($(xcode-select -p) == '/Library/Developer/CommandLineTools') ]]; then
+  if pkgutil --pkg-info com.apple.pkg.CLTools_Executables >/dev/null 2>&1; then
+    echo "Command line tools already installed, taking no action"
+  else
+    if ask "Would you like to install command line tools?" Y; then
+      echo "Installing command line tools"
+      xcode-select --install
+    fi
+  fi
+else
+  echo "Xcode not installed, aborting command line tools install" >&2
+  exit 1
+fi 
+
 loginToAppStore
 
 if ask "Would you like to update and upgrade apps first?" Y; then
@@ -152,6 +167,17 @@ if [ ! -f /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh ]; then
   ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
 else
   echo "pure.zsh already symlinked, taking no action"
+fi
+
+# Install tmux plugin manager
+TPM_DIR=~/.tmux/plugins/tpm
+if [ -d $TPM_DIR ]; then
+  echo "Tmux plugins already exists, taking no action"
+else
+  if ask "Would you like to install tmux plugin manager?" Y; then
+    mkdir -p $TPM_DIR
+    git clone https://github.com/tmux-plugins/tpm $TPM_DIR
+  fi
 fi
 
 # Create database directory for mongo
@@ -294,19 +320,6 @@ else
   fi
 fi
 
-if [[ $(xcode-select -p) == '/Applications/Xcode.app/Contents/Developer' ]]; then
-  if pkgutil --pkg-info com.apple.pkg.CLTools_Executables >/dev/null 2>&1; then
-    echo "Command line tools already installed, taking no action"
-  else
-    if ask "Would you like to install command line tools?" Y; then
-      echo "Installing command line tools"
-      xcode-select --install
-    fi
-  fi
-else
-  echo "Xcode not installed, aborting command line tools install" >&2
-  exit 1
-fi 
 
 RUBY_VERSION=2.5.0
 # We need ruby to support neovim plugins that use ruby, this requires
