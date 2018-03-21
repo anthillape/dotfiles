@@ -5,8 +5,8 @@
 
 # Bail out if the user is not on a mac
 if [ $(uname) != "Darwin" ]; then
-	echo "This script only works for mac, exiting"
-	exit 1
+  echo "This script only works for mac, exiting"
+  exit 1
 fi
 
 # TODO
@@ -25,12 +25,12 @@ set -euo pipefail
 source ./functions.sh
 
 if [ ! -d /Library/Developer/CommandLineTools ]; then
-	if ask "Would you like to install xcode command line tools (required)?" Y; then
-		xcode-select --install
-	else
-		echo "Command line tools are required, you may run them separately with 'xcode-select --install"
-		exit 1
-	fi
+  if ask "Would you like to install xcode command line tools (required)?" Y; then
+    xcode-select --install
+  else
+    echo "Command line tools are required, you may run them separately with 'xcode-select --install"
+    exit 1
+  fi
 fi
 
 
@@ -38,17 +38,17 @@ fi
 # This this brew may fail
 
 if [ ! -d "/usr/local/Frameworks" ]; then
-	echo "Creating missing /usr/local/Frameworks directory"
-	sudo mkdir /usr/local/Frameworks
-	sudo chown $(logname) /usr/local/Frameworks
+  echo "Creating missing /usr/local/Frameworks directory"
+  sudo mkdir /usr/local/Frameworks
+  sudo chown $(logname) /usr/local/Frameworks
 fi
 
 # Test to see if homebrew is installed, if not install it
 if [ ! $(which brew) ]; then
-	echo "Installing Homebrew"
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
+  echo "Installing Homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
 else
-	echo "Homebrew already installed, skipping installation"
+  echo "Homebrew already installed, skipping installation"
 fi
 
 cat <<END_OF_HEREDOC
@@ -73,12 +73,12 @@ END_OF_HEREDOC
 loginToAppStore
 
 if ask "Would you like to update and upgrade apps first?" Y; then
-	echo "Updating and installing brew/cask/mas apps"
-	# Update recipies
-	brew update
+  echo "Updating and installing brew/cask/mas apps"
+  # Update recipies
+  brew update
 
-	# Update installed formulae
-	brew upgrade
+  # Update installed formulae
+  brew upgrade
 fi
 if ask "Would you like to check/update brew/cask/mas dependencies?" Y; then
   echo -e "\nChecking brew dependencies..."
@@ -118,11 +118,11 @@ if ask "Would you like to check/update brew/cask/mas dependencies?" Y; then
 fi
 
 if ask "Would you like to cleanup unused brew / cask / mas apps?" Y; then
-	# Clean up brew, the '-s' option clears the cache, including latest versions
-	brew cleanup -s
+  # Clean up brew, the '-s' option clears the cache, including latest versions
+  brew cleanup -s
 
-	# Clean up brew cask
-	brew cask cleanup
+  # Clean up brew cask
+  brew cask cleanup
 fi
 
 # Add zsh to list of valid login shells at /etc/shells 
@@ -131,167 +131,167 @@ fi
 # (using sudo -s in this case failed on my setup)
 # Then use chsh -s to change users shell to zsh
 if ! grep -Fxq /usr/local/bin/zsh /etc/shells; then
-	echo "Adding homebrew zsh (usr/local/bin/zsh) to /etc/shells"
-	echo /usr/local/bin/zsh | sudo tee -a /etc/shells > /dev/null
-	echo "Changing default shell to zsh"
-	chsh -s /usr/local/bin/zsh
+  echo "Adding homebrew zsh (usr/local/bin/zsh) to /etc/shells"
+  echo /usr/local/bin/zsh | sudo tee -a /etc/shells > /dev/null
+  echo "Changing default shell to zsh"
+  chsh -s /usr/local/bin/zsh
 else
-	echo "Shell already set to zsh, taking no action"
+  echo "Shell already set to zsh, taking no action"
 fi
 
 # Symlink pure.zsh and async.zsh in $fpath so pure theme has access
 if [ ! -f /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh ]; then
-	echo "Symlinking async.zsh for pure theme"
-	ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
+  echo "Symlinking async.zsh for pure theme"
+  ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/async.zsh /usr/local/share/zsh/site-functions/async
 else
-	echo "async.zsh already symlinked, taking no action"
+  echo "async.zsh already symlinked, taking no action"
 fi
 
 if [ ! -f /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh ]; then
-	echo "Symlinking pure.zsh"
-	ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+  echo "Symlinking pure.zsh"
+  ln -s /usr/local/opt/zplug/repos/sindresorhus/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
 else
-	echo "pure.zsh already symlinked, taking no action"
+  echo "pure.zsh already symlinked, taking no action"
 fi
 
 # Create database directory for mongo
 MONGO_DB_DIR=/data/db
 if [ ! -d $MONGO_DB_DIR ]; then 
-	echo "Creating mongo database and setting permissions"
-	sudo mkdir -p $MONGO_DB_DIR
-	sudo chown `whoami`:admin $MONGO_DB_DIR
-	sudo chmod u+xw $MONGO_DB_DIR 
+  echo "Creating mongo database and setting permissions"
+  sudo mkdir -p $MONGO_DB_DIR
+  sudo chown `whoami`:admin $MONGO_DB_DIR
+  sudo chmod u+xw $MONGO_DB_DIR 
 else
-	echo "Mongo database already exists, taking no action"
+  echo "Mongo database already exists, taking no action"
 fi
 
 KARABINER_JSON=~/.config/karabiner/karabiner.json
 if [[ -L $KARABINER_JSON && "$(readlink $KARABINER_JSON)" = "$PWD/karabiner.json" ]]; then
-	echo "karabiner already symlinked, taking no action"
+  echo "karabiner already symlinked, taking no action"
 else
-	if ask "Would you like to symlink karabiner config?" Y; then
-		if [ -f $KARABINER_JSON ]; then
-			echo 'backing up karabiner.json'
-			mv $KARABINER_JSON $KARABINER_JSON.bak
-		else
-			mkdir -p ~/.config/karabiner
-		fi
-		echo 'symlinking karabiner.json'
-		ln -sf $PWD/karabiner.json $KARABINER_JSON
-                echo 'restarting karabiner daemon'
-                launchctl stop org.pqrs.karabiner.karabiner_console_user_server
-                launchctl start org.pqrs.karabiner.karabiner_console_user_server
-	fi
+  if ask "Would you like to symlink karabiner config?" Y; then
+    if [ -f $KARABINER_JSON ]; then
+      echo 'backing up karabiner.json'
+      mv $KARABINER_JSON $KARABINER_JSON.bak
+    else
+      mkdir -p ~/.config/karabiner
+    fi
+    echo 'symlinking karabiner.json'
+    ln -sf $PWD/karabiner.json $KARABINER_JSON
+    echo 'restarting karabiner daemon'
+    launchctl stop org.pqrs.karabiner.karabiner_console_user_server
+    launchctl start org.pqrs.karabiner.karabiner_console_user_server
+  fi
 fi
 
 SLATE=~/.slate
 if [[ -L $SLATE && "$(readlink $SLATE)" = "$PWD/slate" ]]; then
-	echo "slate already symlinked, taking no action"
+  echo "slate already symlinked, taking no action"
 else
-	if ask "Would you like to symlink slate config?" Y; then
-		if [ -f $SLATE ]; then
-			echo "Backing up .slate"
-			mv $SLATE $SLATE.bak
-		fi
-		echo "Symlinking .slate"
-		ln -sf $PWD/slate $SLATE
-	fi
+  if ask "Would you like to symlink slate config?" Y; then
+    if [ -f $SLATE ]; then
+      echo "Backing up .slate"
+      mv $SLATE $SLATE.bak
+    fi
+    echo "Symlinking .slate"
+    ln -sf $PWD/slate $SLATE
+  fi
 fi
 
 SSH=~/.ssh/config
 if [[ -L $SSH && "$(readlink $SSH)" = "$PWD/ssh/config" ]]; then
-	echo "ssh already symlinked, taking no action"
+  echo "ssh already symlinked, taking no action"
 else
-	if ask "Would you like to symlink ssh config?" Y; then
-		if [ -f $SSH ]; then
-			echo "Backing up .ssh/config"
-			mv $SSH $SSH.bak
-		fi
-		echo "Symlinking .ssh/config"
-		ln -sf $PWD/ssh/config $SSH
-	fi
+  if ask "Would you like to symlink ssh config?" Y; then
+    if [ -f $SSH ]; then
+      echo "Backing up .ssh/config"
+      mv $SSH $SSH.bak
+    fi
+    echo "Symlinking .ssh/config"
+    ln -sf $PWD/ssh/config $SSH
+  fi
 fi
 
 ZSH_DIR=~/.zsh
 ZSHRC=~/.zshrc
 ZSHENV=~/.zshenv
 if [[ -L $ZSHRC && "$(readlink $ZSHRC)" = "$PWD/zsh/zshrc" && -L $ZSHENV && -L $ZSH_DIR ]]; then
-	echo "zsh already symlinked, taking no action"
+  echo "zsh already symlinked, taking no action"
 else
-	if ask "Would you like to symlink zsh?" Y; then
-		if [ -d $ZSH_DIR ]; then
-			echo "Backing up .zsh directory"
-			if [ -d $ZSH_DIR.bak ]; then
-				rm -rf $ZSH_DIR.bak
-			fi
-			mv $ZSH_DIR $ZSH_DIR.bak
-		fi
-		if [ -f $ZSHRC ]; then
-			echo "Backing up .zshrc"
-			mv $ZSHRC $ZSHRC.bak
-		fi
-		if [ -f $ZSHENV ]; then
-			echo "Backing up .zshenv"
-			mv $ZSHENV $ZSHENV.bak
-		fi
+  if ask "Would you like to symlink zsh?" Y; then
+    if [ -d $ZSH_DIR ]; then
+      echo "Backing up .zsh directory"
+      if [ -d $ZSH_DIR.bak ]; then
+        rm -rf $ZSH_DIR.bak
+      fi
+      mv $ZSH_DIR $ZSH_DIR.bak
+    fi
+    if [ -f $ZSHRC ]; then
+      echo "Backing up .zshrc"
+      mv $ZSHRC $ZSHRC.bak
+    fi
+    if [ -f $ZSHENV ]; then
+      echo "Backing up .zshenv"
+      mv $ZSHENV $ZSHENV.bak
+    fi
 
-		echo "Symlinking .zsh directory"
-		ln -snf $PWD/zsh $ZSH_DIR
+    echo "Symlinking .zsh directory"
+    ln -snf $PWD/zsh $ZSH_DIR
 
-		echo "Symlinking .zshrc"
-		ln -sf $PWD/zsh/zshrc $ZSHRC
+    echo "Symlinking .zshrc"
+    ln -sf $PWD/zsh/zshrc $ZSHRC
 
-		echo "Symlinking .zshenv"
-		ln -sf $PWD/zsh/zshenv $ZSHENV
-                
-                # zsh cannot be reloaded here as this is a bash script
+    echo "Symlinking .zshenv"
+    ln -sf $PWD/zsh/zshenv $ZSHENV
 
-		echo "You will need to restart / reload your shell for zsh to update"
-	fi
+    # zsh cannot be reloaded here as this is a bash script
+
+    echo "You will need to restart / reload your shell for zsh to update"
+  fi
 fi
 
 TMUX=~/.tmux.conf
 if [[ -L $TMUX && "$(readlink $TMUX)" = "$PWD/tmux/tmux.conf" ]]; then
-	echo "tmux already symlinked, taking no action"
+  echo "tmux already symlinked, taking no action"
 else
-	if ask "Would you like to symlink tmux config?" Y; then
+  if ask "Would you like to symlink tmux config?" Y; then
 
-		if [ -f $TMUX ]; then
-			echo "Backing up .tmux.conf"
-			mv $TMUX $TMUX.bak
-		fi
-		echo "Symlinking .tmux.conf"
-		ln -sf $PWD/tmux/tmux.conf $TMUX
-	fi
+    if [ -f $TMUX ]; then
+      echo "Backing up .tmux.conf"
+      mv $TMUX $TMUX.bak
+    fi
+    echo "Symlinking .tmux.conf"
+    ln -sf $PWD/tmux/tmux.conf $TMUX
+  fi
 fi
 
 NVIM=~/.config/nvim/init.vim
 if [[ -L $NVIM && "$(readlink $NVIM)" = "$PWD/nvim/init.vim" ]]; then
-	echo "nvim already symlinked, taking no action"
+  echo "nvim already symlinked, taking no action"
 else
-	if ask "Would you like to symlink nvim config?" Y; then
+  if ask "Would you like to symlink nvim config?" Y; then
 
-		if [ -f $NVIM ]; then
-			echo "Backing up init.vim"
-			mv $NVIM $NVIM.bak
-		else
-			mkdir -p ~/.config/nvim
-		fi
-		echo "Symlinking init.vim"
-		ln -sf $PWD/nvim/init.vim $NVIM
-	fi
+    if [ -f $NVIM ]; then
+      echo "Backing up init.vim"
+      mv $NVIM $NVIM.bak
+    else
+      mkdir -p ~/.config/nvim
+    fi
+    echo "Symlinking init.vim"
+    ln -sf $PWD/nvim/init.vim $NVIM
+  fi
 fi
 
 PLUG=~/.local/share/nvim/site/autoload/plug.vim
 if [[ -f $PLUG ]]; then
-	echo "Vim plug already installed, taking no action"
+  echo "Vim plug already installed, taking no action"
 else
-	if ask "Would you like to install vim plug" Y; then
-		curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		# Install plugins
-		command nvim +PlugInstall +qall
-	fi
+  if ask "Would you like to install vim plug" Y; then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    # Install plugins
+    command nvim +PlugInstall +qall
+  fi
 fi
 
 if [[ $(xcode-select -p) == '/Applications/Xcode.app/Contents/Developer' ]]; then
