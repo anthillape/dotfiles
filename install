@@ -171,7 +171,7 @@ fi
 
 # Install tmux plugin manager
 TPM_DIR=~/.tmux/plugins/tpm
-if [ -d $TPM_DIR ]; then
+if [ -f $TPM_DIR/tpm ]; then
   echo "Tmux plugins already exists, taking no action"
 else
   if ask "Would you like to install tmux plugin manager?" Y; then
