@@ -53,11 +53,14 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
 " Add fuzzy find plugin
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" https://medium.com/usevim/what-is-modern-vim-2591f6b1ec04
-" Plug 'roxma/nvim-completion-manager'
-" Plug 'roxma/nvim-cm-tern', {'do': 'npm install'}
+" Show git status in gutter
+Plug 'airblade/vim-gitgutter'
+
+" Add indentation guides
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Allow use of tmux pane navigation shortcuts to work in vim splits
 Plug 'christoomey/vim-tmux-navigator'
@@ -74,8 +77,20 @@ Plug 'wokalski/autocomplete-flow'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
+" Javascript highlighting
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'mxw/vim-jsx'
+Plug 'othree/javascript-libraries-syntax.vim'
+
+" CSS highlighting
+Plug 'ap/vim-css-color'
+Plug 'JulesWang/css.vim'
+
 " Initialise plugins
 call plug#end()
+
+syntax enable
 
 " Enable deoplete
 Plug 'wokalski/autocomplete-flow'
@@ -98,4 +113,21 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 
+set background=dark
 colorscheme nord
+
+" Toggle and highlight spaces, tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬,space:·
+highlight NonText ctermfg=1 guifg=#3B4252
+highlight SpecialKey ctermfg=1 guifg=#3B4252
+
+" Leader key should be space
+let mapleader = "\<Space>"
+
+" Mappings
+nmap <leader>so :source $MYVIMRC<CR>
+nmap <leader>l :set list!<CR> " toggle whitespace chars
+
+" Fzf 
+nnoremap <C-T> :FZF<CR>
+inoremap <C-T> <ESC>:FZF<CR>i
