@@ -1,10 +1,8 @@
 " Set true colours
 set termguicolors
 
-" Set indentation to two spaces
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+" Set hard tabs to two characters in width
+set tabstop=2
 
 " Set line numbers on by default
 set number
@@ -49,8 +47,14 @@ Plug 'tpope/vim-surround'
 " gcgc uncomments a set of comments
 Plug 'tpope/vim-commentary'
 
+" Detect tabs in file / project
+Plug 'tpope/vim-sleuth'
+
 " Allow repeating with . for vim-surround and vim-commentary (and others)
 Plug 'tpope/vim-repeat'
+
+" Read editorconfig
+Plug 'editorconfig/editorconfig-vim'
 
 " Add fuzzy find plugin
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
