@@ -78,8 +78,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wokalski/autocomplete-flow'
 
 " Function argument completion with flow and deoplete
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 
 " Javascript highlighting
 Plug 'othree/yajs.vim'
@@ -93,6 +93,12 @@ Plug 'JulesWang/css.vim'
 
 " Initialise plugins
 call plug#end()
+
+let g:ale_fixers = {
+  \ 'javascript': ['eslint']
+  \ }
+
+nmap <leader>d <Plug>(ale_fix)
 
 syntax enable
 
@@ -132,6 +138,6 @@ let mapleader = "\<Space>"
 nmap <leader>so :source $MYVIMRC<CR>
 nmap <leader>l :set list!<CR> " toggle whitespace chars
 
-" Fzf 
+" Fzf
 nnoremap <C-T> :FZF<CR>
 inoremap <C-T> <ESC>:FZF<CR>i
