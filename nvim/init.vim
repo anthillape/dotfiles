@@ -81,6 +81,9 @@ Plug 'wokalski/autocomplete-flow'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
 
+" Prettier fixer
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
 " Javascript highlighting
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -148,3 +151,10 @@ nmap <leader>e :Explore <CR>
 " Fzf
 nnoremap <C-T> :FZF<CR>
 inoremap <C-T> <ESC>:FZF<CR>i
+
+" Prettier settings
+let g:prettier#config#use_tabs = 'true'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#parser = 'flow'
+
