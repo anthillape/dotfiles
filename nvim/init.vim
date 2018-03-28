@@ -98,7 +98,9 @@ let g:ale_fixers = {
   \ 'javascript': ['eslint']
   \ }
 
-nmap <leader>d <Plug>(ale_fix)
+" Split right and below
+set splitbelow
+set splitright
 
 syntax enable
 
@@ -137,6 +139,10 @@ let mapleader = "\<Space>"
 " Mappings
 nmap <leader>so :source $MYVIMRC<CR>
 nmap <leader>l :set list!<CR> " toggle whitespace chars
+nmap <leader>d <Plug>(ale_fix)
+nmap <leader>v :vsplit new <CR>
+nmap <leader>h :split new <CR>
+nmap <leader>r :source $MYVIMRC <CR>
 
 " Fzf
 nnoremap <C-T> :FZF<CR>
