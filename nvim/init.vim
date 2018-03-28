@@ -143,6 +143,7 @@ nmap <leader>d <Plug>(ale_fix)
 nmap <leader>v :vsplit new <CR>
 nmap <leader>h :split new <CR>
 nmap <leader>r :source $MYVIMRC <CR>
+nmap <leader>e :Explore <CR>
 
 " Fzf
 nnoremap <C-T> :FZF<CR>
