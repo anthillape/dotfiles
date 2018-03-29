@@ -81,9 +81,6 @@ Plug 'wokalski/autocomplete-flow'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
 
-" Prettier fixer
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
 " Javascript highlighting
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -98,7 +95,7 @@ Plug 'JulesWang/css.vim'
 call plug#end()
 
 let g:ale_fixers = {
-  \ 'javascript': ['eslint']
+  \ 'javascript': ['prettier_eslint']
   \ }
 
 " Split right and below
@@ -106,9 +103,6 @@ set splitbelow
 set splitright
 
 syntax enable
-
-" Enable deoplete
-Plug 'wokalski/autocomplete-flow'
 
 " Enable powerline fonts in vim airline
 let g:airline_powerline_fonts = 1
@@ -152,9 +146,8 @@ nmap <leader>e :Explore <CR>
 nnoremap <C-T> :FZF<CR>
 inoremap <C-T> <ESC>:FZF<CR>i
 
-" Prettier settings
-let g:prettier#config#use_tabs = 'true'
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#parser = 'flow'
+" Prettier options
+
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_use_local_config = 1
 
