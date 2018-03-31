@@ -57,6 +57,7 @@ Plug 'tpope/vim-repeat'
 Plug 'editorconfig/editorconfig-vim'
 
 " Add fuzzy find plugin
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Show git status in gutter

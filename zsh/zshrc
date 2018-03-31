@@ -56,10 +56,14 @@ fi
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh
 
-
-
 if ! zplug check; then
     zplug install
 fi
 
+# Set fzf default command so it shows hidden files excluding .git folder and node_modues
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
