@@ -57,7 +57,6 @@ Plug 'tpope/vim-repeat'
 Plug 'editorconfig/editorconfig-vim'
 
 " Add fuzzy find plugin
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Show git status in gutter
@@ -148,6 +147,7 @@ inoremap <C-T> <ESC>:FZF<CR>i
 
 " Prettier options
 
-" let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
+
 
