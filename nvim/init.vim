@@ -95,7 +95,7 @@ Plug 'JulesWang/css.vim'
 call plug#end()
 
 let g:ale_fixers = {
-  \ 'javascript': ['prettier_eslint']
+  \ 'javascript': ['prettier_eslint'],
   \ }
 
 " Split right and below
@@ -148,6 +148,6 @@ inoremap <C-T> <ESC>:FZF<CR>i
 
 " Prettier options
 
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 
