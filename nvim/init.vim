@@ -77,6 +77,12 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Add flow support in deoplete
 Plug 'wokalski/autocomplete-flow'
 
+" Add flow typecheck on save
+Plug 'flowtype/vim-flow', {
+  \ 'autoload': {
+  \   'filetypes': 'javascript'
+  \ }}
+
 " Function argument completion with flow and deoplete
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
@@ -106,6 +112,12 @@ syntax enable
 
 " Enable powerline fonts in vim airline
 let g:airline_powerline_fonts = 1
+
+" Only open quickfix window for flow if there are flow errors
+let g:flow#autoclose = 1
+
+" Disable omnifunc completion with flow as we use deoplete for this
+let g:flow#omnifunc = 0
 
 " Sets relative line numbers on for current buffer
 :set number relativenumber
@@ -147,10 +159,9 @@ nmap <leader>v :vsplit new <CR>
 nmap <leader>h :split new <CR>
 nmap <leader>r :source $MYVIMRC <CR>
 nmap <leader>e :Explore <CR>
-
-" Fzf
-nnoremap <C-T> :FZF<CR>
-inoremap <C-T> <ESC>:FZF<CR>i
+nmap <leader>f :FlowMake <CR>
+nnoremap <leader>t :FZF<CR>
+inoremap <leader>t <ESC>:FZF<CR>i
 
 " Prettier options
 
