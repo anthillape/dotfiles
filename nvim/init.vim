@@ -78,8 +78,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wokalski/autocomplete-flow'
 
 " Function argument completion with flow and deoplete
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 " Javascript highlighting
 Plug 'othree/yajs.vim'
@@ -130,6 +130,12 @@ set listchars=tab:▸\ ,eol:¬,space:·
 highlight NonText ctermfg=1 guifg=#3B4252
 highlight SpecialKey ctermfg=1 guifg=#3B4252
 
+" Enable deoplete auto completion
+let g:deoplete#enable_at_startup = 1
+
+" Enable neosnippet
+let g:neosnippet#enable_completed_snippet = 1
+
 " Leader key should be space
 let mapleader = "\<Space>"
 
@@ -148,7 +154,6 @@ inoremap <C-T> <ESC>:FZF<CR>i
 
 " Prettier options
 
-let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 
 
