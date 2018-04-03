@@ -6,8 +6,9 @@ cask_args appdir: "/Applications"
 tap "caskroom/fonts"
 tap "caskroom/cask"
 
-# Add iterm
+# Add iterm and hyper terminals
 cask "iterm2"
+cask "hyper"
 
 # Add nerd font patched meslo fonts
 cask "caskroom/fonts/font-meslo-nerd-font-mono"
