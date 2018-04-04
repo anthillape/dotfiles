@@ -28,8 +28,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Add vim airline fancy status line
 Plug 'vim-airline/vim-airline'
 
-" Add snazzy theme
-Plug 'arcticicestudio/nord-vim'
+" Language pack
+Plug 'sheerun/vim-polyglot'
+
+" Add theme
+Plug 'skielbasa/vim-material-monokai'
 
 " Sensible defaults
 Plug 'tpope/vim-sensible'
@@ -135,7 +138,13 @@ autocmd VimEnter *
   \| endif
 
 set background=dark
-colorscheme nord
+colorscheme material-monokai
+let g:materialmonokai_italic=1
+let g:materialmonokai_subtle_spell=1
+let g:materialmonokai_custom_lint_indicators=1
+let g:airline_theme='materialmonokai'
+
+
 
 " Toggle and highlight spaces, tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬,space:·
