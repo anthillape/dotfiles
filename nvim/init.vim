@@ -86,6 +86,9 @@ Plug 'flowtype/vim-flow', {
   \   'filetypes': 'javascript'
   \ }}
 
+" Add typescript code completion, type signatures, go 
+Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
+
 " Function argument completion with flow and deoplete
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
