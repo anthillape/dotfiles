@@ -108,6 +108,7 @@ call plug#end()
 
 let g:ale_fixers = {
   \ 'javascript': ['prettier_eslint'],
+  \ 'typescript': ['prettier','tslint'],
   \ }
 
 " Split right and below
