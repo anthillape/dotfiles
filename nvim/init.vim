@@ -180,7 +180,7 @@ nnoremap <leader>r :source $MYVIMRC<CR>
 " Toggle whitespace markers
 nnoremap <leader>l :set list!<CR>
 " Run ale fixers
-nnoremap <leader>d <Plug>(ale_fix)
+nmap <leader>d <Plug>(ale_fix)
 " Open vertical / horizontal splits
 nnoremap <leader>v :vsplit new<CR>
 nnoremap <leader>h :split new<CR>
