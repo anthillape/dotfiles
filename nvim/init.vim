@@ -86,7 +86,7 @@ Plug 'flowtype/vim-flow', {
   \   'filetypes': 'javascript'
   \ }}
 
-" Add typescript code completion, type signatures, go 
+" Add typescript code completion, type signatures
 Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
 
 " Function argument completion with flow and deoplete
@@ -173,6 +173,8 @@ let g:neosnippet#enable_completed_snippet = 1
 let mapleader = "\<Space>"
 
 " ---- Mappings ----
+" Stop leader key from moving cursor
+nnoremap <SPACE> <Nop>
 " Reload vimrc
 nnoremap <leader>r :source $MYVIMRC<CR>
 " Toggle whitespace markers
@@ -206,7 +208,6 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nnoremap <leader>x :bd<CR>
 " Fuzzy finding
 nnoremap <leader>t :FZF<CR>
-inoremap <leader>t <ESC>:FZF<CR>i
 
 " Prettier options
 
