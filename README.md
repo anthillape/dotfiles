@@ -15,37 +15,37 @@ then run install
 ```
 ./install
 ```
-and follow the on screen instructions. 
+and follow the on screen instructions.  
 The script will usually test to see if something is already installed / configured, and if not will ask you if you want to go ahead with the change it is about to make. So far you pretty much need to say yes to everything for it to work, but longer term I'd like for it to be able to prevent features from being installed if their pre-requisites aren't available or are misconfigured.
 
 In short the script will: install command line tools, brew, a bunch of brew / cask / mas-cli apps (see the brewfiles directory for specifics), set zsh as default shell, instal the 'pure' theme with async, install tmux plugins, create mongo db, set karabiner up for shortcuts and hotkeys, set up slate for gui window management, set up an ssh config, symlink dotfiles and back up originals, set up nvim with python2, python3, ruby, and node plugin support, plus version and environment management for each. 
 
 ## iTerm2
 
-To get your iterm config working you need to open preferences > general.
-At the bottom check 'Load preferences from a custom folder or URL'
+To get your iterm config working you need to open preferences > general.  
+At the bottom check 'Load preferences from a custom folder or URL'.  
 This should open a file open dialog, here select the file
 `iterm2/com.googlecode.iterm2.plist` in this repo.
 
 ### Stack
 
-brew
-iterm2 (considering hyper)
-zsh / zplug
-tmux / tpm
-neovim / vimplug
-yarn
-nvm
-pyenv
-virtualenv
-rbenv
+- brew
+- iterm2 (considering hyper)
+- zsh / zplug
+- tmux / tpm
+- neovim / vimplug
+- yarn
+- nvm
+- pyenv
+- virtualenv
+- rbenv
 
 ### Style
 
-Meslo with nerd font extensions
-Pure theme for zsh
-Monokai Material colours
-Vim Airline
+- Meslo with nerd font extensions
+- Pure theme for zsh
+- Monokai Material colours
+- Vim Airline
 
 ### Notes
 
