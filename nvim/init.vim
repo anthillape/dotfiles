@@ -37,6 +37,9 @@ Plug 'skielbasa/vim-material-monokai'
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
+" Improvements to netrw built in file browser
+Plug 'tpope/vim-vinegar'
+
 " Add simple editing of surrounding quotes, tags, brackets etc
 " cs'" replaces surrounding ' with "
 " cst" replaces surrounding tag (eg <p>) with "
