@@ -15,7 +15,6 @@ alias ls='ls -GFh'
 alias ll='ls -GFhl'
 
 alias vi='nvim'
-alias vim='nvim'
 
 alias md='mkdir -p'
 alias rd='rmdir'
