@@ -69,6 +69,9 @@ Plug 'junegunn/fzf.vim'
 " Show git status in gutter
 Plug 'airblade/vim-gitgutter'
 
+" Add commands to kill buffers without killing their windows
+Plug 'qpkorr/vim-bufkill'
+
 " Add indentation guides
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -208,7 +211,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 " Close buffer
-nnoremap <leader>x :bd<CR>
+nnoremap <leader>x :BD<CR>
 " Fuzzy finding
 nnoremap <leader>t :FZF<CR>
 
