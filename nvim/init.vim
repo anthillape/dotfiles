@@ -156,6 +156,7 @@ let g:materialmonokai_custom_lint_indicators=1
 let g:airline_theme='materialmonokai'
 
 " Enable airline buffer line using numbered straight tabs
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
