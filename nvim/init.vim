@@ -188,8 +188,8 @@ nnoremap <leader>l :set list!<CR>
 " Run ale fixers
 nmap <leader>d <Plug>(ale_fix)
 " Open vertical / horizontal splits
-nnoremap <leader>v :vsplit new<CR>
-nnoremap <leader>h :split new<CR>
+nnoremap <leader>v :vnew<CR>
+nnoremap <leader>h :new<CR>
 " Open file explorer netrw
 nnoremap <leader>e :Explore<CR>
 " Run flow
