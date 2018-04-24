@@ -164,6 +164,8 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+" Disable slow an unnecessary whitespace feature
+let g:airline#extensions#whitespace#enabled=0
 
 " Toggle and highlight spaces, tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬,space:·
