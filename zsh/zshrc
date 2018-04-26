@@ -15,6 +15,10 @@ export RBENV_ROOT="$HOME/.rbenv"
 # Set prompt to vi mode 
 bindkey -v
 
+# Bind up and down keys to search history with currently entered prompt text
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 # Remember that fpath must be updated before compinit
 fpath=(/usr/local/Cellar/zplug/2.4.2/repos/knu/zsh-manydots-magic $fpath)
 
