@@ -123,6 +123,9 @@ set splitright
 
 syntax enable
 
+" Show whitespace markers by default
+set list
+
 " Enable powerline fonts in vim airline
 let g:airline_powerline_fonts = 1
 
