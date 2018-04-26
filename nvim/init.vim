@@ -218,9 +218,14 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 " Close buffer
 nnoremap <leader>x :BD<CR>
-" Fuzzy finding
-nnoremap <leader>t :FZF<CR>
 
+" Fuzzy find filenames
+nnoremap <C-T> :FZF<CR>
+inoremap <C-T> <ESC>:FZF<CR>i
+
+" Fuzzy find in project text
+nnoremap <C-F> :Ag<CR>
+inoremap <C-F> <ESC>:Ag<CR>i
 " Prettier options
 
 let g:ale_javascript_prettier_use_local_config = 1
