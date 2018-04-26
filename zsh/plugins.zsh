@@ -8,7 +8,7 @@ zplug "tmux-plugins/tmux-sensible"
 zplug "lukechilds/zsh-nvm"
 
 # Add async for the pure theme
-zplug mafredri/zsh-async, from:github
+zplug "mafredri/zsh-async", from:github
 
 # Add plugin that tells you if a command you wrote already has an alias
 zplug "MichaelAquilina/zsh-you-should-use"

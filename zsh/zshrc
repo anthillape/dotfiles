@@ -60,6 +60,8 @@ fi
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239'
+
 if ! zplug check; then
     zplug install
 fi
