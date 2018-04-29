@@ -34,6 +34,9 @@ Plug 'itchyny/lightline.vim'
 " Theme for lightline
 Plug 'anthillape/lightline-material-monokai'
 
+" Display buffers
+Plug 'mgee/lightline-bufferline'
+
 " Language pack
 Plug 'sheerun/vim-polyglot'
 
@@ -134,6 +137,17 @@ let g:lightline = {
   \   }
   \ }
 
+" Bufferline / lightline integration
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+" Show ordinal numbers in buffer tabs
+let g:lightline#bufferline#show_number = 2
+
+" Show buffer line if more than one buffer
+let g:lightline#bufferline#min_buffer_count = 2
+
 " Split right and below
 set splitbelow
 set splitright
@@ -206,17 +220,19 @@ nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 " Last buffer opened
 nnoremap <leader>- :e#<CR>
+
 " Go to numbered buffer tab (using the small superscript number
 " not the actual buffer number)
-" nmap <leader>1 <Plug>AirlineSelectTab1
-" nmap <leader>2 <Plug>AirlineSelectTab2
-" nmap <leader>3 <Plug>AirlineSelectTab3
-" nmap <leader>4 <Plug>AirlineSelectTab4
-" nmap <leader>5 <Plug>AirlineSelectTab5
-" nmap <leader>6 <Plug>AirlineSelectTab6
-" nmap <leader>7 <Plug>AirlineSelectTab7
-" nmap <leader>8 <Plug>AirlineSelectTab8
-" nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>1 <Plug>lightline#bufferline#go(1)
+nmap <leader>2 <Plug>lightline#bufferline#go(2)
+nmap <leader>3 <Plug>lightline#bufferline#go(3)
+nmap <leader>4 <Plug>lightline#bufferline#go(4)
+nmap <leader>5 <Plug>lightline#bufferline#go(5)
+nmap <leader>6 <Plug>lightline#bufferline#go(6)
+nmap <leader>7 <Plug>lightline#bufferline#go(7)
+nmap <leader>8 <Plug>lightline#bufferline#go(8)
+nmap <leader>9 <Plug>lightline#bufferline#go(9)
+
 " Close buffer
 nnoremap <leader>x :BD<CR>
 
