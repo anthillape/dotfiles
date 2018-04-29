@@ -45,7 +45,6 @@ This should open a file open dialog, here select the file
 - Meslo with nerd font extensions
 - Pure theme for zsh
 - Monokai Material colours
-- Vim Airline
 
 ### Notes
 

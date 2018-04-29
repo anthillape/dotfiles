@@ -7,6 +7,9 @@ set tabstop=2
 " Set line numbers on by default
 set number
 
+" Hide the -- INSERT -- message when in insert mode as it is in lightline
+set noshowmode
+
 " Specify ruby provider for plugins
 let g:ruby_host_prog = '~/.rbenv/versions/2.5.0/bin/neovim-ruby-host'
 
@@ -25,8 +28,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " ---- Define plugins ----
 
-" Add vim airline fancy status line
-Plug 'vim-airline/vim-airline'
+" Light weight status line
+Plug 'itchyny/lightline.vim'
+
+" Theme for lightline
+Plug 'anthillape/lightline-material-monokai'
 
 " Language pack
 Plug 'sheerun/vim-polyglot'
@@ -117,6 +123,17 @@ let g:ale_fixers = {
   \ 'typescript': ['prettier','tslint'],
   \ }
 
+let g:lightline = {
+  \ 'colorscheme': 'monokai_material',
+  \ 'active': {
+  \   'right': [ 
+  \     [ 'lineinfo' ],
+  \     [ 'percent' ],
+  \     [ 'fileencoding', 'filetype' ]
+  \   ]
+  \   }
+  \ }
+
 " Split right and below
 set splitbelow
 set splitright
@@ -125,9 +142,6 @@ syntax enable
 
 " Show whitespace markers by default
 set list
-
-" Enable powerline fonts in vim airline
-let g:airline_powerline_fonts = 1
 
 " Only open quickfix window for flow if there are flow errors
 let g:flow#autoclose = 1
@@ -156,19 +170,6 @@ colorscheme material-monokai
 let g:materialmonokai_italic=1
 let g:materialmonokai_subtle_spell=1
 let g:materialmonokai_custom_lint_indicators=1
-let g:airline_theme='materialmonokai'
-
-" Enable airline buffer line using numbered straight tabs
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-" Disable slow an unnecessary whitespace feature
-let g:airline#extensions#whitespace#enabled=0
 
 " Toggle and highlight spaces, tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬,space:·
@@ -207,15 +208,15 @@ nnoremap <leader>p :bp<CR>
 nnoremap <leader>- :e#<CR>
 " Go to numbered buffer tab (using the small superscript number
 " not the actual buffer number)
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+" nmap <leader>1 <Plug>AirlineSelectTab1
+" nmap <leader>2 <Plug>AirlineSelectTab2
+" nmap <leader>3 <Plug>AirlineSelectTab3
+" nmap <leader>4 <Plug>AirlineSelectTab4
+" nmap <leader>5 <Plug>AirlineSelectTab5
+" nmap <leader>6 <Plug>AirlineSelectTab6
+" nmap <leader>7 <Plug>AirlineSelectTab7
+" nmap <leader>8 <Plug>AirlineSelectTab8
+" nmap <leader>9 <Plug>AirlineSelectTab9
 " Close buffer
 nnoremap <leader>x :BD<CR>
 
@@ -226,8 +227,11 @@ inoremap <C-T> <ESC>:FZF<CR>i
 " Fuzzy find in project text
 nnoremap <C-F> :Ag<CR>
 inoremap <C-F> <ESC>:Ag<CR>i
-" Prettier options
 
+" Help should open in a vertical split to the right
+cabbrev h vert bo h
+
+" Prettier options
 let g:ale_javascript_prettier_use_local_config = 1
 
 
