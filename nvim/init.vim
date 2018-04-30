@@ -115,8 +115,10 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 
 " CSS highlighting
-Plug 'ap/vim-css-color'
 Plug 'JulesWang/css.vim'
+
+" Colour hex codes etc
+Plug 'chrisbra/Colorizer'
 
 " Initialise plugins
 call plug#end()
@@ -220,6 +222,8 @@ nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 " Last buffer opened
 nnoremap <leader>- :e#<CR>
+" Toggle color highlighting
+nnoremap <leader>c :ColorToggle<CR>
 
 " Go to numbered buffer tab (using the small superscript number
 " not the actual buffer number)
