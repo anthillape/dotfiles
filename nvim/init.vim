@@ -12,7 +12,7 @@ set noshowmode
 
 " Specify ruby provider for plugins
 let g:ruby_host_prog = '~/.rbenv/versions/2.5.0/bin/neovim-ruby-host'
-
+ 
 " Specify node provider for plugins
 let g:node_host_prog = '/usr/local/bin/neovim-node-host'
 
@@ -119,6 +119,10 @@ Plug 'JulesWang/css.vim'
 
 " Colour hex codes etc
 Plug 'chrisbra/Colorizer'
+
+" Use al (a line), and il (inner line) text objects for yanking lines without
+" whitespace
+Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line'
 
 " Initialise plugins
 call plug#end()
