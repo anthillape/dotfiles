@@ -254,4 +254,5 @@ cabbrev h vert bo h
 " Prettier options
 let g:ale_javascript_prettier_use_local_config = 1
 
-
+" Use system clipboard as default register
+set clipboard^=unnamed
