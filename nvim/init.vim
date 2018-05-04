@@ -124,6 +124,9 @@ Plug 'chrisbra/Colorizer'
 " whitespace
 Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line'
 
+" Styled components CSS support
+Plug 'styled-components/vim-styled-components'
+
 " Initialise plugins
 call plug#end()
 
