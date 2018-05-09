@@ -7,6 +7,10 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Reduce key sequence delay, mostly to get out of vi normal mode faster
+# Default is 400ms, we are reducing to 10ms
+KEYTIMEOUT=1
+
 # Export environment variables for pyenv and rbenv
 # These must use $HOME, not ~
 export PYENV_ROOT="$HOME/.pyenv"
