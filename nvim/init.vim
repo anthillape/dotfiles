@@ -22,6 +22,9 @@ let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
 " Specify python3 provider for plugins
 let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 
+" Eliminate Esc delay, this will only work if there
+" are no mappings beginning with Esc
+set timeoutlen=1000 ttimeoutlen=0
 
 " Specify plugin for directories
 call plug#begin('~/.local/share/nvim/plugged')
