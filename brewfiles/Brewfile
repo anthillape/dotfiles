@@ -79,3 +79,6 @@ brew "zplug"
 
 # Add z shell
 brew "zsh"
+
+# Add scala built tool
+brew "sbt@1"
