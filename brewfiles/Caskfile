@@ -5,6 +5,7 @@ cask_args appdir: "/Applications"
 # Add formulae repositories
 tap "caskroom/fonts"
 tap "caskroom/cask"
+tap "caskroom/versions"
 
 # Add iterm and hyper terminals
 cask "iterm2"
@@ -40,3 +41,6 @@ cask "slate"
 # Add some browsers for testing
 cask "firefox"
 cask "google-chrome"
+
+# Add java8 for use with scala
+cask "java8"

@@ -11,6 +11,9 @@ SAVEHIST=10000
 # Default is 400ms, we are reducing to 10ms
 KEYTIMEOUT=1
 
+# Set default java version to java8 for use with scala
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
 # Export environment variables for pyenv and rbenv
 # These must use $HOME, not ~
 export PYENV_ROOT="$HOME/.pyenv"
