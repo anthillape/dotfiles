@@ -1,84 +1,87 @@
-# Installs macOS apps using brew
+# installs macOS apps using brew
 
-# Add formulae repositories
+# formulae repositories
 tap "homebrew/core"
 tap "homebrew/bundle"
 
-# Add cask, for installing non-cli apps that are not on the app store
+# cask, for installing non-cli apps that are not on the app store
 brew "cask"
 
-# Add fuzzy finder, which can later be used in vim to open files in a dir
+# fuzzy finder, which can later be used in vim to open files in a dir
 brew "fzf"
 
-# Add a url extrator for the tmux plugin https://github.com/tmux-plugins/tmux-urlview
+# a url extrator for the tmux plugin https://github.com/tmux-plugins/tmux-urlview
 brew "extract_url"
 
-# Replace builtin macos sed with gnu-sed
+# replace builtin macos sed with gnu-sed
 brew "gnu-sed", args: ["with-default-names"]
 
-# Replace system git
+# replace system git
 brew "git"
 
-# Replace system grep
+# replace system grep
 brew "grep"
 
-# Add mas-cli, which installs app store apps 
+# mas-cli, which installs app store apps 
 brew "mas"
 
-# Add mongodb
+# mongodb
 brew "mongodb"
 
-# Add neovim, a refactored, async vim
+# neovim, a refactored, async vim
 brew "neovim"
 
-# Add ruby version manager
+# ruby version manager
 brew "rbenv"
 
-# Add python version manager
+# python version manager
 brew "pyenv"
 
-# Add pyenv / virtualenv integration 
+# pyenv / virtualenv integration 
 brew "pyenv-virtualenv", args: ["--HEAD"]
 
-# Add readline pyenv requirement
+# readline pyenv requirement
 brew "readline"
 
-# Add wrapper to let tmux use pbcopy and pbpaste
+# wrapper to let tmux use pbcopy and pbpaste
 brew "reattach-to-user-namespace"
 
-# Add find-in-file functionality
+# find-in-file functionality
 brew "the_silver_searcher"
 
-# Add simplified man page util
+# simplified man page util
 brew "tldr"
 
-# Add terminal multiplexer
+# terminal multiplexer
 brew "tmux"
 
-# Add app to show n deep directory hierarchies
+# app to show n deep directory hierarchies
 brew "tree"
 
 # Replace vim
 brew "vim", args: ["with-override-system-vi"]
 
-# Add file watchers 
+# file watchers 
 brew "watch"
 brew "watchman"
 
-# Add file downloader
+# file downloader
 brew "wget"
 
-# Add xz pyenv requirement
+# xz pyenv requirement
 brew "xz"
 
-# Add npm replacement yarn
+# npm replacement yarn
 brew "yarn", args: ["without-node"]
 
-# Add zsh plugin manager
+# zsh plugin manager
 brew "zplug"
 
-# Add z shell
+# z shell
 brew "zsh"
 
-# Add scala built tool
+# scala build tool
 brew "sbt@1"
+
+# scala repl
+brew "scala"
