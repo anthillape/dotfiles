@@ -9,7 +9,6 @@ tap "caskroom/versions"
 
 # Add iterm and hyper terminals
 cask "iterm2"
-cask "hyper"
 
 # Add nerd font patched meslo fonts
 cask "caskroom/fonts/font-meslo-nerd-font-mono"
@@ -23,12 +22,6 @@ cask "dropbox"
 # Add flux, which warms screen colours at night
 cask "flux"
 
-# Add imageoptim, image file size reducer
-cask "imageoptim"
-
-# Add kakapo, an ambient sound mixer / player
-cask "kakapo"
-
 # Add karabiner-elements (the karabiner cask is old
 cask "karabiner-elements"
 
@@ -41,6 +34,3 @@ cask "slate"
 # Add some browsers for testing
 cask "firefox"
 cask "google-chrome"
-
-# Add java8 for use with scala
-cask "java8"

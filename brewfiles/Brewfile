@@ -79,9 +79,3 @@ brew "zplug"
 
 # z shell
 brew "zsh"
-
-# scala build tool
-brew "sbt@1"
-
-# scala repl
-brew "scala"

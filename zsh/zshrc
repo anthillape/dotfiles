@@ -48,6 +48,9 @@ export NVM_AUTO_USE=true
 # Set options
 source ~/.zsh/setopt.zsh
 
+# Load scripts
+source ~/.zsh/scripts.zsh
+
 # Set aliases
 source ~/.zsh/alias.zsh
 
@@ -63,6 +66,8 @@ if command -v rbenv 1>/dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
 
+# Add brews sbin to the path
+export PATH="/usr/local/sbin:$PATH"
 
 # Load plugins with zplug
 source ~/.zsh/plugins.zsh

@@ -326,7 +326,7 @@ else
 fi
 
 
-RUBY_VERSION=2.5.0
+RUBY_VERSION=2.6.4
 # We need ruby to support neovim plugins that use ruby, this requires
 # the ruby neovim provider to be setup and the neovim ruby gem
 # to be installed.
@@ -363,7 +363,7 @@ else
   echo "Ruby neovim module already installed, taking no action"
 fi
 
-NODE_VERSION=9.6.1
+NODE_VERSION=12.11.0
 # Load nvm into this shell
 # The nvm.sh script contains unbound variables so we use `set +u`
 # to disable checks for these that would cause the script to
@@ -402,7 +402,7 @@ else
 fi
 
 # Install python2 for neovim plugins
-PYTHON2_VERSION=2.7.11
+PYTHON2_VERSION=2.7.16
 
 # Check that desired version of python2 is installed
 if [[ ! $(pyenv versions | grep $PYTHON2_VERSION) ]]; then
@@ -446,7 +446,7 @@ source deactivate > /dev/null 2>&1
 set -u
 
 # Install python3 for neovim plugins
-PYTHON3_VERSION=3.5.2
+PYTHON3_VERSION=3.7.4
 
 # Check that desired version of python3 is installed
 if [[ ! $(pyenv versions | grep $PYTHON3_VERSION) ]]; then

@@ -11,7 +11,7 @@ set number
 set noshowmode
 
 " Specify ruby provider for plugins
-let g:ruby_host_prog = '~/.rbenv/versions/2.5.0/bin/neovim-ruby-host'
+let g:ruby_host_prog = '~/.rbenv/versions/2.6.4/bin/neovim-ruby-host'
  
 " Specify node provider for plugins
 let g:node_host_prog = '/usr/local/bin/neovim-node-host'
@@ -90,27 +90,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Allow use of tmux pane navigation shortcuts to work in vim splits
 Plug 'christoomey/vim-tmux-navigator'
 
-" Ale async linter
-Plug 'w0rp/ale'
-
-" Deoplete autocompletion framework, adds autocomplete dropdown
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Add flow support in deoplete
-Plug 'wokalski/autocomplete-flow'
-
-" Add flow typecheck on save
-Plug 'flowtype/vim-flow', {
-  \ 'autoload': {
-  \   'filetypes': 'javascript'
-  \ }}
-
-" Add typescript code completion, type signatures
-Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
-
-" Function argument completion with flow and deoplete
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
 " Javascript highlighting
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -133,10 +112,10 @@ Plug 'styled-components/vim-styled-components'
 " Initialise plugins
 call plug#end()
 
-let g:ale_fixers = {
-  \ 'javascript': ['prettier_eslint'],
-  \ 'typescript': ['prettier','tslint'],
-  \ }
+" let g:ale_fixers = {
+"   \ 'javascript': ['prettier_eslint'],
+"   \ 'typescript': ['prettier','tslint'],
+"   \ }
 
 let g:lightline = {
   \ 'colorscheme': 'monokai_material',
@@ -219,7 +198,7 @@ nnoremap <leader>r :source $MYVIMRC<CR>
 " Toggle whitespace markers
 nnoremap <leader>l :set list!<CR>
 " Run ale fixers
-nmap <leader>d <Plug>(ale_fix)
+" nmap <leader>d <Plug>(ale_fix)
 " Open vertical / horizontal splits
 nnoremap <leader>v :vnew<CR>
 nnoremap <leader>h :new<CR>
@@ -262,7 +241,7 @@ inoremap <C-F> <ESC>:Ag<CR>i
 cabbrev h vert bo h
 
 " Prettier options
-let g:ale_javascript_prettier_use_local_config = 1
+" let g:ale_javascript_prettier_use_local_config = 1
 
 " Use system clipboard as default register
 set clipboard^=unnamed

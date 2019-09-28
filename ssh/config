@@ -1,5 +1,8 @@
 # Automatically load keys into the ssh-agent and store passphrases in macOS keychain
 Host *
  AddKeysToAgent yes
+ # OpenSSH doesn't know about UseKeychain, so when using it we ignore it,
+ # This is not needed if we are using the default mac ssh at /usr/bin/ssh 
+ IgnoreUnknown UseKeychain
  UseKeychain yes
  IdentityFile ~/.ssh/id_rsa
