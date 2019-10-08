@@ -34,3 +34,4 @@ cask "slate"
 # Add some browsers for testing
 cask "firefox"
 cask "google-chrome"
+
