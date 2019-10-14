@@ -66,6 +66,9 @@ if command -v rbenv 1>/dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
 
+# Add path to gnu-sed
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
 # Add brews sbin to the path
 export PATH="/usr/local/sbin:$PATH"
 
