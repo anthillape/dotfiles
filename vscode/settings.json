@@ -1,0 +1,21 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "javascript.validate.enable": false,
+    "flow.useNPMPackagedFlow": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": true
+    },
+    "gitlens.keymap": "alternate",
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
+    "editor.formatOnSave": true,
+    "prettier.requireConfig": true,
+    "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
+    "window.zoomLevel": 1,
+    "workbench.activityBar.visible": true,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "One Monokai"
+}
