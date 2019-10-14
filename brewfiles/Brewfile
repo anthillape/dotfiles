@@ -15,7 +15,7 @@ brew "fzf"
 brew "extract_url"
 
 # replace builtin macos sed with gnu-sed
-brew "gnu-sed", args: ["with-default-names"]
+brew "gnu-sed"
 
 # replace system git
 brew "git"
@@ -36,7 +36,7 @@ brew "rbenv"
 brew "pyenv"
 
 # pyenv / virtualenv integration 
-brew "pyenv-virtualenv", args: ["--HEAD"]
+brew "pyenv-virtualenv", args: ["HEAD"]
 
 # readline pyenv requirement
 brew "readline"
@@ -57,7 +57,7 @@ brew "tmux"
 brew "tree"
 
 # Replace vim
-brew "vim", args: ["with-override-system-vi"]
+brew "vim"
 
 # file watchers 
 brew "watch"
@@ -70,7 +70,7 @@ brew "wget"
 brew "xz"
 
 # npm replacement yarn
-brew "yarn", args: ["without-node"]
+brew "yarn", args: ["ignore-dependencies"]
 
 # zsh plugin manager
 brew "zplug"
@@ -79,5 +79,6 @@ brew "zplug"
 brew "zsh"
 
 # mongodb
-#
+
 brew "mongodb-community"
+
