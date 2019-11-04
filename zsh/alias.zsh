@@ -23,3 +23,4 @@ alias d='dirs -v' # List last used directories
 alias serve='python -m SimpleHTTPServer'
 
 alias mong='mongod --config /usr/local/etc/mongod.conf'
+

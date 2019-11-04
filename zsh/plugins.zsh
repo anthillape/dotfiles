@@ -33,9 +33,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:2
 # Git plugin from ohmyzsh
 zplug "plugins/git", from:oh-my-zsh
 
-# Add oh-my-zsh style ... to go up many levels
-zplug "knu/zsh-manydots-magic"
-
 # Add fish style autosuggestions as you type
 zplug "zsh-users/zsh-autosuggestions", defer:3
 ZSH_AUTOSUGGEST_USE_ASYNC="true"

@@ -19,31 +19,28 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export PYENV_ROOT="$HOME/.pyenv"
 export RBENV_ROOT="$HOME/.rbenv"
 
-# Set prompt to vi mode 
-bindkey -v
-
-# Bind up and down keys to search history with currently entered prompt text
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-
-# Remember that fpath must be updated before compinit
-fpath=(/usr/local/Cellar/zplug/2.4.2/repos/knu/zsh-manydots-magic $fpath)
-
-zstyle :compinstall filename '$HOME/.zshrc'
-autoload -Uz compinit
-compinit
-
-autoload -Uz manydots-magic
-manydots-magic
-
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
 # Lazy load nvm so it doesn't load when you open a new shell
 export NVM_LAZY_LOAD=true
 
 # Automatically switch to node version in local .nvmrc
 export NVM_AUTO_USE=true
+
+# Bind up and down keys to search history with currently entered prompt text
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+# Always use emacs mode
+bindkey -e
+
+# Rebind ctrl K to get it working in tmux
+bindkey \^K kill-line
+
+zstyle :compinstall filename '$HOME/.zshrc'
+autoload -Uz compinit
+compinit
+
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 # Set options
 source ~/.zsh/setopt.zsh
@@ -86,5 +83,3 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-

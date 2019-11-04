@@ -30,7 +30,7 @@ This should open a file open dialog, here select the file
 ### Stack
 
 - brew
-- iterm2 (considering hyper)
+- iterm2
 - zsh / zplug
 - tmux / tpm
 - neovim / vimplug
