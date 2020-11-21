@@ -81,5 +81,10 @@
     {
         "key": "ctrl+cmd+.",
         "command": "editor.action.fixAll"
+    },
+    {
+        "key": "ctrl+cmd+backspace",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
