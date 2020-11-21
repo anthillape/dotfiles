@@ -1,6 +1,6 @@
 # dotfiles
 
-These are my dotfiles. They are heavily geared towards frontend dev on macOS with neovim.  
+These are my dotfiles. They are heavily geared towards frontend dev on macOS.  
 Use them at your own peril!
 
 ### Installation

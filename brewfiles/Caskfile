@@ -7,7 +7,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-cask"
 tap "homebrew/cask-versions"
 
-# Add iterm and hyper terminals
+# Add iterm terminal
 cask "iterm2"
 
 # Add nerd font patched meslo fonts
@@ -22,7 +22,7 @@ cask "dropbox"
 # Add flux, which warms screen colours at night
 cask "flux"
 
-# Add karabiner-elements (the karabiner cask is old
+# Add karabiner-elements
 cask "karabiner-elements"
 
 # Add little snitch, to keep an eye on your network
@@ -36,5 +36,4 @@ cask "firefox"
 cask "google-chrome"
 
 # Add java
-
 cask "java"
