@@ -8,12 +8,6 @@ tap "mongodb/brew"
 # cask, for installing non-cli apps that are not on the app store
 brew "cask"
 
-# fuzzy finder, which can later be used in vim to open files in a dir
-brew "fzf"
-
-# a url extrator for the tmux plugin https://github.com/tmux-plugins/tmux-urlview
-brew "extract_url"
-
 # replace builtin macos sed with gnu-sed
 brew "gnu-sed"
 
@@ -22,9 +16,6 @@ brew "git"
 
 # replace system grep
 brew "grep"
-
-# mas-cli, which installs app store apps 
-brew "mas"
 
 # neovim, a refactored, async vim
 brew "neovim"
@@ -41,17 +32,11 @@ brew "pyenv-virtualenv", args: ["HEAD"]
 # readline pyenv requirement
 brew "readline"
 
-# wrapper to let tmux use pbcopy and pbpaste
-brew "reattach-to-user-namespace"
-
 # find-in-file functionality
 brew "the_silver_searcher"
 
 # simplified man page util
 brew "tldr"
-
-# terminal multiplexer
-brew "tmux"
 
 # app to show n deep directory hierarchies
 brew "tree"
@@ -70,7 +55,7 @@ brew "wget"
 brew "xz"
 
 # npm replacement yarn
-brew "yarn", args: ["ignore-dependencies"]
+brew "yarn"
 
 # zsh plugin manager
 brew "zplug"
@@ -78,7 +63,4 @@ brew "zplug"
 # z shell
 brew "zsh"
 
-# mongodb
-
-brew "mongodb-community"
 

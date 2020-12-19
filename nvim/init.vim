@@ -16,9 +16,6 @@ let g:ruby_host_prog = '~/.rbenv/versions/2.6.4/bin/neovim-ruby-host'
 " Specify node provider for plugins
 let g:node_host_prog = '/usr/local/bin/neovim-node-host'
 
-" Specify python2 provider for plugins
-let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
-
 " Specify python3 provider for plugins
 let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 
@@ -74,48 +71,18 @@ Plug 'tpope/vim-repeat'
 " Read editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-" Add fuzzy find plugin
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-
-" Show git status in gutter
-Plug 'airblade/vim-gitgutter'
-
 " Add commands to kill buffers without killing their windows
 Plug 'qpkorr/vim-bufkill'
 
 " Add indentation guides
 Plug 'nathanaelkane/vim-indent-guides'
 
-" Allow use of tmux pane navigation shortcuts to work in vim splits
-Plug 'christoomey/vim-tmux-navigator'
-
-" Javascript highlighting
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'mxw/vim-jsx'
-Plug 'othree/javascript-libraries-syntax.vim'
-
-" CSS highlighting
-Plug 'JulesWang/css.vim'
-
-" Colour hex codes etc
-Plug 'chrisbra/Colorizer'
-
 " Use al (a line), and il (inner line) text objects for yanking lines without
 " whitespace
 Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line'
 
-" Styled components CSS support
-Plug 'styled-components/vim-styled-components'
-
 " Initialise plugins
 call plug#end()
-
-" let g:ale_fixers = {
-"   \ 'javascript': ['prettier_eslint'],
-"   \ 'typescript': ['prettier','tslint'],
-"   \ }
 
 let g:lightline = {
   \ 'colorscheme': 'monokai_material',
@@ -148,12 +115,6 @@ syntax enable
 " Show whitespace markers by default
 set list
 
-" Only open quickfix window for flow if there are flow errors
-let g:flow#autoclose = 1
-
-" Disable omnifunc completion with flow as we use deoplete for this
-let g:flow#omnifunc = 0
-
 " Sets relative line numbers on for current buffer
 :set number relativenumber
 
@@ -181,12 +142,6 @@ set listchars=tab:▸\ ,eol:¬,space:·
 highlight NonText ctermfg=1 guifg=#3B4252
 highlight SpecialKey ctermfg=1 guifg=#3B4252
 
-" Enable deoplete auto completion
-let g:deoplete#enable_at_startup = 1
-
-" Enable neosnippet
-let g:neosnippet#enable_completed_snippet = 1
-
 " Leader key should be space
 let mapleader = "\<Space>"
 
@@ -197,15 +152,11 @@ nnoremap <SPACE> <Nop>
 nnoremap <leader>r :source $MYVIMRC<CR>
 " Toggle whitespace markers
 nnoremap <leader>l :set list!<CR>
-" Run ale fixers
-" nmap <leader>d <Plug>(ale_fix)
 " Open vertical / horizontal splits
 nnoremap <leader>v :vnew<CR>
 nnoremap <leader>h :new<CR>
 " Open file explorer netrw
 nnoremap <leader>e :Explore<CR>
-" Run flow
-nnoremap <leader>f :FlowMake<CR>
 " Next / Prev buffer
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
@@ -229,19 +180,8 @@ nmap <leader>9 <Plug>lightline#bufferline#go(9)
 " Close buffer
 nnoremap <leader>x :BD<CR>
 
-" Fuzzy find filenames
-nnoremap <C-T> :FZF<CR>
-inoremap <C-T> <ESC>:FZF<CR>i
-
-" Fuzzy find in project text
-nnoremap <C-F> :Ag<CR>
-inoremap <C-F> <ESC>:Ag<CR>i
-
 " Help should open in a vertical split to the right
 cabbrev h vert bo h
-
-" Prettier options
-" let g:ale_javascript_prettier_use_local_config = 1
 
 " Use system clipboard as default register
 set clipboard^=unnamed

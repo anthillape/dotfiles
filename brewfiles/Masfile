@@ -1,8 +1,0 @@
-# Installs macOS app store apps using mas-cli via brew 
-
-mas "1Password", id: 443987910
-mas "iA Writer", id: 775737590
-mas "Soulver", id: 413965349
-mas "Todoist", id: 585829637
-mas "Pixelmator", id: 407963104
-mas "Xcode", id: 497799835

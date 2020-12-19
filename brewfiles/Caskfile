@@ -7,11 +7,8 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-cask"
 tap "homebrew/cask-versions"
 
-# Add iterm and hyper terminals
+# Add iterm
 cask "iterm2"
-
-# Add nerd font patched meslo fonts
-cask "homebrew/cask-fonts/font-meslo-nerd-font-mono"
 
 # Add caffeine, app to stop mac going to sleep
 cask "caffeine"
@@ -22,7 +19,7 @@ cask "dropbox"
 # Add flux, which warms screen colours at night
 cask "flux"
 
-# Add karabiner-elements (the karabiner cask is old
+# Add karabiner-elements
 cask "karabiner-elements"
 
 # Add little snitch, to keep an eye on your network
@@ -35,6 +32,5 @@ cask "slate"
 cask "firefox"
 cask "google-chrome"
 
-# Add java
-
-cask "java"
+# Add java for zsh plugins (compinit)
+cask "adoptopenjdk8"
